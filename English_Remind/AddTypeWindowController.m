@@ -60,4 +60,6 @@
     [self close];
 
 }
+- (IBAction)actionTypeInput:(id)sender {
+}
 @end

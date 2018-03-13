@@ -11,7 +11,7 @@
 #import "ShowWindowController.h"
 #import "VocabularyModel.h"
 
-@interface NewVocabularyViewController ()<NSTableViewDelegate,NSTableViewDataSource>{
+@interface NewVocabularyViewController ()<NSTableViewDelegate,NSTableViewDataSource,NSTextFieldDelegate>{
     ShowWindowController *showVC;
     AddVocabularyViewController *addVC;
 }
@@ -38,14 +38,19 @@
 
 @implementation NewVocabularyViewController
 
-NSMutableArray *vocabularys;
+NSMutableArray *vocabularys, *selectedArray, *originVocalarys;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    [self windowRefresh:nil];
+    [self.searchBar setDelegate:self]; // or whatever object you want
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowRefresh:) name:@"AddVocabularyViewControllerRefresh" object:nil];
+    selectedArray = [[NSMutableArray alloc] init];
+    originVocalarys = [[NSMutableArray alloc] init];
+    vocabularys = [[NSMutableArray alloc] init];
+    [self windowRefresh:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowRefresh:) name:@"NewVocabularyViewControllerRefresh" object:nil];
+    
     
 }
 - (void)windowRefresh:(NSNotification *)notification {
@@ -55,9 +60,8 @@ NSMutableArray *vocabularys;
 - (void)loadDataFromSQLite {
     
     [SQLiteLibrary setDatabaseFileInDocuments:@"NewVocabulary.sqlite"];
-    
-    //    [SQLiteLibrary setupDatabaseAndForceReset:NO];
-    vocabularys = [[NSMutableArray alloc] init];
+    [vocabularys removeAllObjects];
+    [originVocalarys removeAllObjects];
     [SQLiteLibrary begin];
     [SQLiteLibrary performQuery:@"SELECT * FROM Vocabulary" block:^(sqlite3_stmt *rowData) {
         VocabularyModel * vocabularyModel = [[VocabularyModel alloc] init];
@@ -66,12 +70,12 @@ NSMutableArray *vocabularys;
         vocabularyModel.vietnamese = sqlite3_column_nsstring(rowData, 2);
         vocabularyModel.type = sqlite3_column_nsstring(rowData, 3);
         vocabularyModel.isFavorite = sqlite3_column_int(rowData, 4);
-        [vocabularys addObject:vocabularyModel];
+        [originVocalarys addObject:vocabularyModel];
         
     }];
     [SQLiteLibrary commit];
     
-    
+    vocabularys = [originVocalarys mutableCopy];
     [self.listTable  reloadData];
 }
 #pragma mark TableView Delegate DataSource
@@ -93,12 +97,25 @@ NSMutableArray *vocabularys;
     } else if ([identifierStr isEqualToString: @"type"]){
         [cell textField].stringValue = [NSString stringWithFormat:@"%@",vocabularyModel.type];
     } else if ([identifierStr isEqualToString: @"favorite"]){
-        [cell textField].stringValue = [NSString stringWithFormat:@"%hhd",vocabularyModel.isFavorite];
+        FavoriteTableCellView *cell = [tableView makeViewWithIdentifier:identifierStr owner:self];
+        [cell.btnFavorite setTag: row];
+        [cell.btnFavorite setAction:@selector(abtnFavoriteRow:)];
+        [cell.btnFavorite setState: vocabularyModel.isFavorite];
+        return cell;
+
     }
     else if ([identifierStr isEqualToString: @"select"]){
         SelectTableCellView *cell = [tableView makeViewWithIdentifier:identifierStr owner:self];
         [cell.btnSelect setTag: row];
         [cell.btnSelect setAction:@selector(abtnSelectRow:)];
+        for (VocabularyModel *item in selectedArray) {
+            if (item.ID == vocabularyModel.ID){
+                [cell.btnSelect setState: 1];
+                return cell;
+            }
+            
+        }
+        [cell.btnSelect setState: 0];
         return cell;
     }
     else if ([identifierStr isEqualToString: @"delete"]){
@@ -126,10 +143,46 @@ NSMutableArray *vocabularys;
         [self.listTable reloadData];
     });
 }
+- (IBAction)abtnFavoriteRow:(id)sender {
+    NSButton *select = sender;
+    VocabularyModel * vocabularyModel = (VocabularyModel*)vocabularys[select.tag] ;
+
+    NSString *sql = [NSString stringWithFormat:@"UPDATE Vocabulary SET favorite = '%ld' WHERE id = %li",(long)select.state, vocabularyModel.ID];
+    [SQLiteLibrary begin];
+    [SQLiteLibrary performQuery: sql block:^(sqlite3_stmt *rowData) {
+    }];
+    [SQLiteLibrary commit];
+}
 - (IBAction)abtnSelectRow:(id)sender {
     NSButton *select = sender;
-    
-    NSLog(@"🔴%li and status :%ld",(long)select.tag, (long)select.state);
+    if ([select state] == 1){
+        if ([selectedArray count] >= 10){
+            [select setState:0];
+            NSAlert *alert = [NSAlert new];
+            alert.messageText = @"Warning";
+            alert.informativeText = @"Maximum 10 at time";
+            [alert addButtonWithTitle:@"Ok"];
+            
+            [alert beginSheetModalForWindow:[self.view window] completionHandler:^(NSInteger result) {
+                NSLog(@"Success");
+            }];
+            return;
+        } else {
+            VocabularyModel *vocabulary = [vocabularys objectAtIndex:select.tag];
+            [selectedArray addObject:vocabulary];
+        }
+    } else {
+        VocabularyModel *vocabulary = [vocabularys objectAtIndex:select.tag];
+        for (long i = selectedArray.count - 1; i >= 0; i--) {
+            VocabularyModel *item = selectedArray[i];
+            if (vocabulary.ID == item.ID){
+                [selectedArray removeObjectAtIndex:i];
+                break;
+            }
+        }
+
+    }
+   
 }
 - (IBAction)abtnAdd:(id)sender {
     
@@ -139,9 +192,26 @@ NSMutableArray *vocabularys;
 }
 
 - (IBAction)abtnAuto:(id)sender {
+    [self loadDataFromSQLite];
+
+    [selectedArray removeAllObjects];
+    for (VocabularyModel *vocabulary in vocabularys) {
+        if (vocabulary.isFavorite == TRUE){
+            [selectedArray addObject:vocabulary];
+        }
+        if ([selectedArray count] >= 10){
+            [self.listTable reloadData];
+            return;
+        }
+    }
+    [self.listTable reloadData];
+
 }
 
 - (IBAction)abtnClear:(id)sender {
+    [selectedArray removeAllObjects];
+    [self.listTable reloadData];
+    
 }
 
 - (IBAction)abtnInsert:(id)sender {
@@ -165,10 +235,25 @@ NSMutableArray *vocabularys;
     showVC = [[ShowWindowController alloc] initWithWindowNibName:@"ShowWindowController"];
     showVC.window.level = CGWindowLevelForKey(kCGMaximumWindowLevelKey);
     [showVC showWindow:self];
-    
 }
 
 - (IBAction)abtnPoint:(id)sender {
     NSLog(@"Point:");
 }
+#pragma mark Methods privacy
+-(void)autoSelectionAction:(NSNotification *)notification{
+    
+}
+- (void)controlTextDidChange:(NSNotification *)notification {
+    NSTextField *textField = [notification object];
+    if (![[textField stringValue] isEqualToString:@""]){
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.english contains[c] %@",[textField stringValue]];
+    vocabularys = [NSMutableArray arrayWithArray:[originVocalarys filteredArrayUsingPredicate:predicate]];
+    } else {
+        vocabularys = [originVocalarys mutableCopy];
+    }
+    [self.listTable reloadData];
+}
+
+
 @end

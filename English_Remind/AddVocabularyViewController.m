@@ -23,6 +23,8 @@
 
 @property (weak) IBOutlet NSPopUpButton *selectTypeName;
 
+@property (weak) IBOutlet NSButton *isMultiple;
+
 @end
 
 @implementation AddVocabularyViewController
@@ -73,16 +75,24 @@
     
     int64_t temp =  [SQLiteLibrary performInsertQueryInTable:@"Vocabulary" data:dict];
     if (temp >= 0){
-
-        
+        if ((self.isMultiple.state == 0)){
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NewVocabularyViewControllerRefresh" object:nil];
         [self close];
+        } else {
+            self.notifyLabel.stringValue = @"Successfull";
+            self.englishTextField.stringValue = @"";
+            self.vietnameseTextField.stringValue = @"";
+            [self.englishTextField becomeFirstResponder];
+        }
     } else {
-        NSLog(@"🔴Fail");
+        self.notifyLabel.stringValue = @"Something wrong";
     }
     [SQLiteLibrary commit];
+    
 }
 
 - (IBAction)cloaseAction:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"NewVocabularyViewControllerRefresh" object:nil];
     [self close];
 }
 - (IBAction)createTypeAction:(id)sender {
@@ -125,5 +135,10 @@
     }];
     [SQLiteLibrary commit];
 }
+
+- (IBAction)ActionEnglish:(id)sender {
+    [self.vietnameseTextField becomeFirstResponder];
+}
+
 
 @end

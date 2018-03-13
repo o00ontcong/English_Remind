@@ -11,6 +11,8 @@
 #import "SQLiteLibrary.h"
 #import "DeleteTableCellView.h"
 #import "SelectTableCellView.h"
+#import "FavoriteTableCellView.h"
 @interface NewVocabularyViewController : NSViewController
+@property (weak) IBOutlet NSTextField *searchBar;
 
 @end

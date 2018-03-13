@@ -9,6 +9,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="AddVocabularyViewController">
             <connections>
                 <outlet property="englishTextField" destination="Ut0-kL-WX0" id="Z5j-UR-84a"/>
+                <outlet property="isMultiple" destination="5E9-cW-lnR" id="RWU-GY-jXm"/>
                 <outlet property="notifyLabel" destination="09y-tr-B1h" id="2VI-zB-nyP"/>
                 <outlet property="selectTypeName" destination="dLY-oF-XGu" id="Ef6-Oa-OhR"/>
                 <outlet property="vietnameseTextField" destination="3wG-aW-hjP" id="7PJ-b6-8jW"/>
@@ -43,6 +44,9 @@
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <action selector="addAction:" target="-2" id="cT9-km-8sk"/>
+                        </connections>
                     </textField>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S41-YD-gq5">
                         <rect key="frame" x="389" y="91" width="48" height="35"/>
@@ -63,6 +67,9 @@
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <action selector="ActionEnglish:" target="-2" id="opS-u2-WCz"/>
+                        </connections>
                     </textField>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rSe-jY-qBj">
                         <rect key="frame" x="467" y="91" width="48" height="35"/>
@@ -127,7 +134,7 @@
                         </popUpButtonCell>
                     </popUpButton>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O5c-Aw-PP2">
-                        <rect key="frame" x="230" y="91" width="123" height="32"/>
+                        <rect key="frame" x="358" y="139" width="123" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Create Type " bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Uph-Fm-raw">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -136,6 +143,14 @@
                         <connections>
                             <action selector="createTypeAction:" target="-2" id="h3Y-dk-cwp"/>
                         </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5E9-cW-lnR">
+                        <rect key="frame" x="223" y="89" width="139" height="39"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Add More Multi" bezelStyle="regularSquare" imagePosition="left" inset="2" id="aHf-HH-lev">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
                     </button>
                 </subviews>
             </view>

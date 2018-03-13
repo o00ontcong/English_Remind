@@ -23,6 +23,7 @@
 		483C09BE1FC90F2900482286 /* AddVocabularyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 483C09BC1FC90F2900482286 /* AddVocabularyViewController.xib */; };
 		489A7ADB2057713600396C51 /* DeleteTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 489A7ADA2057713600396C51 /* DeleteTableCellView.m */; };
 		489A7ADE2057749B00396C51 /* SelectTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 489A7ADD2057749B00396C51 /* SelectTableCellView.m */; };
+		489A7AE12057AEC300396C51 /* FavoriteTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 489A7AE02057AEC300396C51 /* FavoriteTableCellView.m */; };
 		48E5D5F3204E449100140322 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E5D5F2204E449100140322 /* libsqlite3.tbd */; };
 		48E5D5F9204E483900140322 /* SQLiteLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E5D5F8204E483800140322 /* SQLiteLibrary.m */; };
 		48E5D5FC204E78FD00140322 /* AutoEV.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 48E5D5FB204E78FD00140322 /* AutoEV.sqlite */; };
@@ -61,6 +62,8 @@
 		489A7ADA2057713600396C51 /* DeleteTableCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeleteTableCellView.m; sourceTree = "<group>"; };
 		489A7ADC2057749B00396C51 /* SelectTableCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectTableCellView.h; sourceTree = "<group>"; };
 		489A7ADD2057749B00396C51 /* SelectTableCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectTableCellView.m; sourceTree = "<group>"; };
+		489A7ADF2057AEC300396C51 /* FavoriteTableCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FavoriteTableCellView.h; sourceTree = "<group>"; };
+		489A7AE02057AEC300396C51 /* FavoriteTableCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FavoriteTableCellView.m; sourceTree = "<group>"; };
 		48E5D5F2204E449100140322 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		48E5D5F7204E483800140322 /* SQLiteLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteLibrary.h; sourceTree = "<group>"; };
 		48E5D5F8204E483800140322 /* SQLiteLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteLibrary.m; sourceTree = "<group>"; };
@@ -145,10 +148,7 @@
 				48107179204E92A6007C7103 /* AddTypeWindowController.h */,
 				4810717A204E92A6007C7103 /* AddTypeWindowController.m */,
 				4810717B204E92A6007C7103 /* AddTypeWindowController.xib */,
-				489A7AD92057713600396C51 /* DeleteTableCellView.h */,
-				489A7ADA2057713600396C51 /* DeleteTableCellView.m */,
-				489A7ADC2057749B00396C51 /* SelectTableCellView.h */,
-				489A7ADD2057749B00396C51 /* SelectTableCellView.m */,
+				489A7AE22057AECB00396C51 /* TableVIewCell */,
 			);
 			name = "New Vocabulary";
 			sourceTree = "<group>";
@@ -192,6 +192,19 @@
 				04AF1F3A1DE147E2009BA57A /* Main.storyboard */,
 			);
 			name = General;
+			sourceTree = "<group>";
+		};
+		489A7AE22057AECB00396C51 /* TableVIewCell */ = {
+			isa = PBXGroup;
+			children = (
+				489A7AD92057713600396C51 /* DeleteTableCellView.h */,
+				489A7ADA2057713600396C51 /* DeleteTableCellView.m */,
+				489A7ADC2057749B00396C51 /* SelectTableCellView.h */,
+				489A7ADD2057749B00396C51 /* SelectTableCellView.m */,
+				489A7ADF2057AEC300396C51 /* FavoriteTableCellView.h */,
+				489A7AE02057AEC300396C51 /* FavoriteTableCellView.m */,
+			);
+			name = TableVIewCell;
 			sourceTree = "<group>";
 		};
 		8ADE941FE2882BC8B16916BD /* Frameworks */ = {
@@ -396,6 +409,7 @@
 				489A7ADE2057749B00396C51 /* SelectTableCellView.m in Sources */,
 				48E5D5F9204E483900140322 /* SQLiteLibrary.m in Sources */,
 				483C09B81FC90CDC00482286 /* ShowWindowController.m in Sources */,
+				489A7AE12057AEC300396C51 /* FavoriteTableCellView.m in Sources */,
 				04AF1F201DE13D0A009BA57A /* main.m in Sources */,
 				04AF1F1D1DE13D0A009BA57A /* AppDelegate.m in Sources */,
 				483C09BD1FC90F2900482286 /* AddVocabularyViewController.m in Sources */,

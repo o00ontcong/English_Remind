@@ -12,5 +12,6 @@
 #import "AddTypeWindowController.h"
 
 @interface AddVocabularyViewController : NSWindowController
+- (IBAction)ActionEnglish:(id)sender;
 
 @end
