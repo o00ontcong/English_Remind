@@ -385,19 +385,22 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="Bpz-iw-gbX">
+                                                        <tableCellView id="Bpz-iw-gbX" customClass="SelectTableCellView">
                                                             <rect key="frame" x="606" y="1" width="80" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FdL-sQ-v8Z">
                                                                     <rect key="frame" x="13" y="-2" width="43" height="18"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="only" state="on" inset="2" id="Wq2-e6-O15">
+                                                                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="only" inset="2" id="Wq2-e6-O15">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
                                                                 </button>
                                                             </subviews>
+                                                            <connections>
+                                                                <outlet property="btnSelect" destination="FdL-sQ-v8Z" id="XvN-6E-lCe"/>
+                                                            </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
@@ -414,7 +417,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="Row-hi-T1L">
+                                                        <tableCellView id="Row-hi-T1L" customClass="DeleteTableCellView">
                                                             <rect key="frame" x="689" y="1" width="100" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -427,6 +430,9 @@
                                                                     </buttonCell>
                                                                 </button>
                                                             </subviews>
+                                                            <connections>
+                                                                <outlet property="btnDelete" destination="tCi-yI-Z7w" id="GMr-3T-LjM"/>
+                                                            </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>

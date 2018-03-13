@@ -17,14 +17,11 @@
 }
 
 @property (weak) IBOutlet NSTableView *listTable;
-@property (weak) IBOutlet NSTableView *currentTable;
 
 @property (weak) IBOutlet NSTextField *labelPoint;
 @property (weak) IBOutlet NSTextField *textFieldTime;
 
 
-- (IBAction)abtnAdd:(id)sender;
-- (IBAction)abtnRemove:(id)sender;
 - (IBAction)abtnAuto:(id)sender;
 - (IBAction)abtnClear:(id)sender;
 
@@ -46,12 +43,15 @@ NSMutableArray *vocabularys;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    [self loadDataFromSQLite];
-    showVC = [[ShowWindowController alloc] initWithWindowNibName:@"ShowWindowController"];
-    
+    [self windowRefresh:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowRefresh:) name:@"AddVocabularyViewControllerRefresh" object:nil];
     
 }
+- (void)windowRefresh:(NSNotification *)notification {
+    [self loadDataFromSQLite];
 
+}
 - (void)loadDataFromSQLite {
     
     [SQLiteLibrary setDatabaseFileInDocuments:@"NewVocabulary.sqlite"];
@@ -66,8 +66,6 @@ NSMutableArray *vocabularys;
         vocabularyModel.vietnamese = sqlite3_column_nsstring(rowData, 2);
         vocabularyModel.type = sqlite3_column_nsstring(rowData, 3);
         vocabularyModel.isFavorite = sqlite3_column_int(rowData, 4);
-
-        
         [vocabularys addObject:vocabularyModel];
         
     }];
@@ -76,7 +74,7 @@ NSMutableArray *vocabularys;
     
     [self.listTable  reloadData];
 }
-
+#pragma mark TableView Delegate DataSource
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
     return vocabularys.count;
 }
@@ -98,15 +96,43 @@ NSMutableArray *vocabularys;
         [cell textField].stringValue = [NSString stringWithFormat:@"%hhd",vocabularyModel.isFavorite];
     }
     else if ([identifierStr isEqualToString: @"select"]){
+        SelectTableCellView *cell = [tableView makeViewWithIdentifier:identifierStr owner:self];
+        [cell.btnSelect setTag: row];
+        [cell.btnSelect setAction:@selector(abtnSelectRow:)];
+        return cell;
     }
     else if ([identifierStr isEqualToString: @"delete"]){
+        DeleteTableCellView *cell = [tableView makeViewWithIdentifier:identifierStr owner:self];
+        [cell.btnDelete setTag: row];
+        [cell.btnDelete setAction:@selector(abtnDeleteRow:)];
+        return cell;
     }
     return cell;
 }
+#pragma mark Action Button
+- (IBAction)abtnDeleteRow:(id)sender {
+    NSButton *delete = sender;
+    NSLog(@"🔴%li",(long)delete.tag);
+    VocabularyModel * vocabularyModel = (VocabularyModel*)vocabularys[delete.tag];
+    NSString * sql = [NSString stringWithFormat:@"DELETE FROM Vocabulary WHERE id = %li",(long)vocabularyModel.ID];
 
-
-
+    [SQLiteLibrary begin];
+    [SQLiteLibrary performQuery: sql block:^(sqlite3_stmt *rowData) {
+       
+    }];
+    [SQLiteLibrary commit];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [vocabularys removeObjectAtIndex:delete.tag];
+        [self.listTable reloadData];
+    });
+}
+- (IBAction)abtnSelectRow:(id)sender {
+    NSButton *select = sender;
+    
+    NSLog(@"🔴%li and status :%ld",(long)select.tag, (long)select.state);
+}
 - (IBAction)abtnAdd:(id)sender {
+    
 }
 
 - (IBAction)abtnRemove:(id)sender {
@@ -136,6 +162,7 @@ NSMutableArray *vocabularys;
 }
 
 - (IBAction)abtnPlayNow:(id)sender {
+    showVC = [[ShowWindowController alloc] initWithWindowNibName:@"ShowWindowController"];
     showVC.window.level = CGWindowLevelForKey(kCGMaximumWindowLevelKey);
     [showVC showWindow:self];
     

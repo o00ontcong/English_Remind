@@ -9,7 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "Utility.h"
 #import "SQLiteLibrary.h"
-
+#import "DeleteTableCellView.h"
+#import "SelectTableCellView.h"
 @interface NewVocabularyViewController : NSViewController
 
 @end
