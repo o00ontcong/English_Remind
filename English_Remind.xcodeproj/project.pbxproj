@@ -1,0 +1,543 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		02B472511FCD135E00A3131F /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B472501FCD135E00A3131F /* Utility.m */; };
+		02B4725A1FCD1DB400A3131F /* VocabularyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B472591FCD1DB400A3131F /* VocabularyModel.m */; };
+		04AF1F1D1DE13D0A009BA57A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AF1F1C1DE13D0A009BA57A /* AppDelegate.m */; };
+		04AF1F201DE13D0A009BA57A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AF1F1F1DE13D0A009BA57A /* main.m */; };
+		04AF1F341DE13D47009BA57A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04AF1F331DE13D47009BA57A /* Assets.xcassets */; };
+		04AF1F361DE13E28009BA57A /* NMDatePicker in Resources */ = {isa = PBXBuildFile; fileRef = 04AF1F351DE13E28009BA57A /* NMDatePicker */; };
+		04AF1F3B1DE147E2009BA57A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AF1F3A1DE147E2009BA57A /* Main.storyboard */; };
+		04AF1F3E1DE192A3009BA57A /* NewVocabularyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AF1F3D1DE192A3009BA57A /* NewVocabularyViewController.m */; };
+		4810717C204E92A6007C7103 /* AddTypeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4810717A204E92A6007C7103 /* AddTypeWindowController.m */; };
+		4810717D204E92A6007C7103 /* AddTypeWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4810717B204E92A6007C7103 /* AddTypeWindowController.xib */; };
+		483C09B81FC90CDC00482286 /* ShowWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 483C09B61FC90CDB00482286 /* ShowWindowController.m */; };
+		483C09B91FC90CDC00482286 /* ShowWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 483C09B71FC90CDB00482286 /* ShowWindowController.xib */; };
+		483C09BD1FC90F2900482286 /* AddVocabularyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 483C09BB1FC90F2900482286 /* AddVocabularyViewController.m */; };
+		483C09BE1FC90F2900482286 /* AddVocabularyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 483C09BC1FC90F2900482286 /* AddVocabularyViewController.xib */; };
+		48E5D5F3204E449100140322 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E5D5F2204E449100140322 /* libsqlite3.tbd */; };
+		48E5D5F9204E483900140322 /* SQLiteLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E5D5F8204E483800140322 /* SQLiteLibrary.m */; };
+		48E5D5FC204E78FD00140322 /* AutoEV.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 48E5D5FB204E78FD00140322 /* AutoEV.sqlite */; };
+		48E5D5FD204E790800140322 /* NewVocabulary.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 04AF1F3F1DE1C119009BA57A /* NewVocabulary.sqlite */; };
+		55322FA238D4C61ECB2D5524 /* Pods_English_Remind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C822BC9D39095DCC689BCB4 /* Pods_English_Remind.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		02B4724F1FCD135E00A3131F /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		02B472501FCD135E00A3131F /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
+		02B472581FCD1DB400A3131F /* VocabularyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VocabularyModel.h; sourceTree = "<group>"; };
+		02B472591FCD1DB400A3131F /* VocabularyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VocabularyModel.m; sourceTree = "<group>"; };
+		04AF1F181DE13D0A009BA57A /* English_Remind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = English_Remind.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		04AF1F1B1DE13D0A009BA57A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		04AF1F1C1DE13D0A009BA57A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		04AF1F1F1DE13D0A009BA57A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		04AF1F291DE13D0A009BA57A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04AF1F331DE13D47009BA57A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		04AF1F351DE13E28009BA57A /* NMDatePicker */ = {isa = PBXFileReference; lastKnownFileType = folder; path = NMDatePicker; sourceTree = "<group>"; };
+		04AF1F371DE13E41009BA57A /* English_Remind-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "English_Remind-Bridging-Header.h"; sourceTree = "<group>"; };
+		04AF1F3A1DE147E2009BA57A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		04AF1F3C1DE192A3009BA57A /* NewVocabularyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewVocabularyViewController.h; sourceTree = "<group>"; };
+		04AF1F3D1DE192A3009BA57A /* NewVocabularyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewVocabularyViewController.m; sourceTree = "<group>"; };
+		04AF1F3F1DE1C119009BA57A /* NewVocabulary.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = NewVocabulary.sqlite; sourceTree = "<group>"; };
+		432745FD4A6A040498E6604D /* Pods-English_Remind.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-English_Remind.release.xcconfig"; path = "Pods/Target Support Files/Pods-English_Remind/Pods-English_Remind.release.xcconfig"; sourceTree = "<group>"; };
+		48107179204E92A6007C7103 /* AddTypeWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddTypeWindowController.h; sourceTree = "<group>"; };
+		4810717A204E92A6007C7103 /* AddTypeWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddTypeWindowController.m; sourceTree = "<group>"; };
+		4810717B204E92A6007C7103 /* AddTypeWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTypeWindowController.xib; sourceTree = "<group>"; };
+		483C09B51FC90CDB00482286 /* ShowWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowWindowController.h; sourceTree = "<group>"; };
+		483C09B61FC90CDB00482286 /* ShowWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowWindowController.m; sourceTree = "<group>"; };
+		483C09B71FC90CDB00482286 /* ShowWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowWindowController.xib; sourceTree = "<group>"; };
+		483C09BA1FC90F2900482286 /* AddVocabularyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddVocabularyViewController.h; sourceTree = "<group>"; };
+		483C09BB1FC90F2900482286 /* AddVocabularyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddVocabularyViewController.m; sourceTree = "<group>"; };
+		483C09BC1FC90F2900482286 /* AddVocabularyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddVocabularyViewController.xib; sourceTree = "<group>"; };
+		48E5D5F2204E449100140322 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		48E5D5F7204E483800140322 /* SQLiteLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteLibrary.h; sourceTree = "<group>"; };
+		48E5D5F8204E483800140322 /* SQLiteLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteLibrary.m; sourceTree = "<group>"; };
+		48E5D5FB204E78FD00140322 /* AutoEV.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = AutoEV.sqlite; sourceTree = "<group>"; };
+		9C822BC9D39095DCC689BCB4 /* Pods_English_Remind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_English_Remind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF898AB6AAF5D75E96A1E925 /* Pods-English_Remind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-English_Remind.debug.xcconfig"; path = "Pods/Target Support Files/Pods-English_Remind/Pods-English_Remind.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		04AF1F151DE13D0A009BA57A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48E5D5F3204E449100140322 /* libsqlite3.tbd in Frameworks */,
+				55322FA238D4C61ECB2D5524 /* Pods_English_Remind.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04AF1F0F1DE13D0A009BA57A = {
+			isa = PBXGroup;
+			children = (
+				04AF1F1A1DE13D0A009BA57A /* English_Remind */,
+				04AF1F191DE13D0A009BA57A /* Products */,
+				A188BAF6CD4A10398E358F73 /* Pods */,
+				8ADE941FE2882BC8B16916BD /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		04AF1F191DE13D0A009BA57A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				04AF1F181DE13D0A009BA57A /* English_Remind.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		04AF1F1A1DE13D0A009BA57A /* English_Remind */ = {
+			isa = PBXGroup;
+			children = (
+				48107180204E98AD007C7103 /* Library */,
+				48107182204E98EF007C7103 /* Resource */,
+				04AF1F401DE1C4B3009BA57A /* Models */,
+				4810717E204E9815007C7103 /* New Vocabulary */,
+				4810717F204E9839007C7103 /* Available Vocabulary */,
+				48107183204E994E007C7103 /* General */,
+				04AF1F1E1DE13D0A009BA57A /* Supporting Files */,
+			);
+			path = English_Remind;
+			sourceTree = "<group>";
+		};
+		04AF1F1E1DE13D0A009BA57A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				04AF1F371DE13E41009BA57A /* English_Remind-Bridging-Header.h */,
+				04AF1F331DE13D47009BA57A /* Assets.xcassets */,
+				04AF1F291DE13D0A009BA57A /* Info.plist */,
+				04AF1F1F1DE13D0A009BA57A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		04AF1F401DE1C4B3009BA57A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				02B472581FCD1DB400A3131F /* VocabularyModel.h */,
+				02B472591FCD1DB400A3131F /* VocabularyModel.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		4810717E204E9815007C7103 /* New Vocabulary */ = {
+			isa = PBXGroup;
+			children = (
+				04AF1F3C1DE192A3009BA57A /* NewVocabularyViewController.h */,
+				04AF1F3D1DE192A3009BA57A /* NewVocabularyViewController.m */,
+				483C09BA1FC90F2900482286 /* AddVocabularyViewController.h */,
+				483C09BB1FC90F2900482286 /* AddVocabularyViewController.m */,
+				483C09BC1FC90F2900482286 /* AddVocabularyViewController.xib */,
+				48107179204E92A6007C7103 /* AddTypeWindowController.h */,
+				4810717A204E92A6007C7103 /* AddTypeWindowController.m */,
+				4810717B204E92A6007C7103 /* AddTypeWindowController.xib */,
+			);
+			name = "New Vocabulary";
+			sourceTree = "<group>";
+		};
+		4810717F204E9839007C7103 /* Available Vocabulary */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Available Vocabulary";
+			sourceTree = "<group>";
+		};
+		48107180204E98AD007C7103 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				02B4724F1FCD135E00A3131F /* Utility.h */,
+				02B472501FCD135E00A3131F /* Utility.m */,
+				48E5D5F7204E483800140322 /* SQLiteLibrary.h */,
+				48E5D5F8204E483800140322 /* SQLiteLibrary.m */,
+				04AF1F351DE13E28009BA57A /* NMDatePicker */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		48107182204E98EF007C7103 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				04AF1F3F1DE1C119009BA57A /* NewVocabulary.sqlite */,
+				48E5D5FB204E78FD00140322 /* AutoEV.sqlite */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
+		48107183204E994E007C7103 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				04AF1F1B1DE13D0A009BA57A /* AppDelegate.h */,
+				04AF1F1C1DE13D0A009BA57A /* AppDelegate.m */,
+				483C09B51FC90CDB00482286 /* ShowWindowController.h */,
+				483C09B61FC90CDB00482286 /* ShowWindowController.m */,
+				483C09B71FC90CDB00482286 /* ShowWindowController.xib */,
+				04AF1F3A1DE147E2009BA57A /* Main.storyboard */,
+			);
+			name = General;
+			sourceTree = "<group>";
+		};
+		8ADE941FE2882BC8B16916BD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				48E5D5F2204E449100140322 /* libsqlite3.tbd */,
+				9C822BC9D39095DCC689BCB4 /* Pods_English_Remind.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A188BAF6CD4A10398E358F73 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FF898AB6AAF5D75E96A1E925 /* Pods-English_Remind.debug.xcconfig */,
+				432745FD4A6A040498E6604D /* Pods-English_Remind.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		04AF1F171DE13D0A009BA57A /* English_Remind */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04AF1F2C1DE13D0A009BA57A /* Build configuration list for PBXNativeTarget "English_Remind" */;
+			buildPhases = (
+				3F4AB75C4FC9C19010054422 /* [CP] Check Pods Manifest.lock */,
+				0D95810731C1431FBD43BAE2 /* 📦 Check Pods Manifest.lock */,
+				04AF1F141DE13D0A009BA57A /* Sources */,
+				04AF1F151DE13D0A009BA57A /* Frameworks */,
+				04AF1F161DE13D0A009BA57A /* Resources */,
+				54AAD7EC45C699EFD6F23C5A /* 📦 Embed Pods Frameworks */,
+				FF8C7757567B72E77D3CE144 /* 📦 Copy Pods Resources */,
+				9CE299E2BCBA7614279C06C7 /* [CP] Embed Pods Frameworks */,
+				3B327C80F217C3ABDF13FB5D /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = English_Remind;
+			productName = English_Remind;
+			productReference = 04AF1F181DE13D0A009BA57A /* English_Remind.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04AF1F101DE13D0A009BA57A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = MAC;
+				TargetAttributes = {
+					04AF1F171DE13D0A009BA57A = {
+						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 04AF1F131DE13D0A009BA57A /* Build configuration list for PBXProject "English_Remind" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 04AF1F0F1DE13D0A009BA57A;
+			productRefGroup = 04AF1F191DE13D0A009BA57A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				04AF1F171DE13D0A009BA57A /* English_Remind */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		04AF1F161DE13D0A009BA57A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				483C09B91FC90CDC00482286 /* ShowWindowController.xib in Resources */,
+				48E5D5FC204E78FD00140322 /* AutoEV.sqlite in Resources */,
+				04AF1F341DE13D47009BA57A /* Assets.xcassets in Resources */,
+				4810717D204E92A6007C7103 /* AddTypeWindowController.xib in Resources */,
+				48E5D5FD204E790800140322 /* NewVocabulary.sqlite in Resources */,
+				04AF1F361DE13E28009BA57A /* NMDatePicker in Resources */,
+				04AF1F3B1DE147E2009BA57A /* Main.storyboard in Resources */,
+				483C09BE1FC90F2900482286 /* AddVocabularyViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0D95810731C1431FBD43BAE2 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3B327C80F217C3ABDF13FB5D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-English_Remind/Pods-English_Remind-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3F4AB75C4FC9C19010054422 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-English_Remind-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		54AAD7EC45C699EFD6F23C5A /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-English_Remind/Pods-English_Remind-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9CE299E2BCBA7614279C06C7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-English_Remind/Pods-English_Remind-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FF8C7757567B72E77D3CE144 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-English_Remind/Pods-English_Remind-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		04AF1F141DE13D0A009BA57A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02B4725A1FCD1DB400A3131F /* VocabularyModel.m in Sources */,
+				48E5D5F9204E483900140322 /* SQLiteLibrary.m in Sources */,
+				483C09B81FC90CDC00482286 /* ShowWindowController.m in Sources */,
+				04AF1F201DE13D0A009BA57A /* main.m in Sources */,
+				04AF1F1D1DE13D0A009BA57A /* AppDelegate.m in Sources */,
+				483C09BD1FC90F2900482286 /* AddVocabularyViewController.m in Sources */,
+				02B472511FCD135E00A3131F /* Utility.m in Sources */,
+				04AF1F3E1DE192A3009BA57A /* NewVocabularyViewController.m in Sources */,
+				4810717C204E92A6007C7103 /* AddTypeWindowController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		04AF1F2A1DE13D0A009BA57A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		04AF1F2B1DE13D0A009BA57A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		04AF1F2D1DE13D0A009BA57A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF898AB6AAF5D75E96A1E925 /* Pods-English_Remind.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = English_Remind/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "o00ontcong.English-Remind";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "English_Remind/English_Remind-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		04AF1F2E1DE13D0A009BA57A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 432745FD4A6A040498E6604D /* Pods-English_Remind.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = English_Remind/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "o00ontcong.English-Remind";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "English_Remind/English_Remind-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		04AF1F131DE13D0A009BA57A /* Build configuration list for PBXProject "English_Remind" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04AF1F2A1DE13D0A009BA57A /* Debug */,
+				04AF1F2B1DE13D0A009BA57A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04AF1F2C1DE13D0A009BA57A /* Build configuration list for PBXNativeTarget "English_Remind" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04AF1F2D1DE13D0A009BA57A /* Debug */,
+				04AF1F2E1DE13D0A009BA57A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 04AF1F101DE13D0A009BA57A /* Project object */;
+}
