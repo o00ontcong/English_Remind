@@ -70,7 +70,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="ColorRose" id="Q5H-uW-T2A"/>
                             </imageView>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fMB-pB-WJm">
-                                <rect key="frame" x="562" y="94" width="81" height="32"/>
+                                <rect key="frame" x="683" y="88" width="81" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Auto" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vDc-nC-gzj">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -81,7 +81,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gAf-x1-4ep">
-                                <rect key="frame" x="56" y="124" width="66" height="41"/>
+                                <rect key="frame" x="56" y="60" width="66" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="000" id="jOt-yb-4pQ">
                                     <font key="font" metaFont="system" size="34"/>
@@ -90,7 +90,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WMa-cc-EDa">
-                                <rect key="frame" x="56" y="95" width="66" height="21"/>
+                                <rect key="frame" x="56" y="34" width="66" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Point" id="bFV-N7-HU7">
                                     <font key="font" metaFont="system" size="17"/>
@@ -98,43 +98,21 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z9a-rX-whD" userLabel="Insert">
-                                <rect key="frame" x="70" y="34" width="82" height="32"/>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z9a-rX-whD" userLabel="Insert">
+                                <rect key="frame" x="504" y="88" width="81" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Insert" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="HKG-vz-eza">
+                                <buttonCell key="cell" type="push" title="Insert" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="HKG-vz-eza">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system" size="18"/>
+                                    <font key="font" metaFont="system" size="20"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="abtnInsert:" target="XlH-uh-09R" id="5w1-79-oMh"/>
                                 </connections>
                             </button>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ojX-Q1-Bvt" userLabel="Delete">
-                                <rect key="frame" x="189" y="34" width="82" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Delete" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="OwJ-Ny-qc4">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system" size="18"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="abtnDelete:" target="XlH-uh-09R" id="bx7-Eg-Saz"/>
-                                </connections>
-                            </button>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jMX-cb-z91" userLabel="Update">
-                                <rect key="frame" x="303" y="34" width="82" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Update" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="umJ-db-hmS">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system" size="18"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="abtnUpdate:" target="XlH-uh-09R" id="sdt-dE-IVm"/>
-                                </connections>
-                            </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cgn-UV-Pvu" userLabel="PlayNow">
-                                <rect key="frame" x="531" y="34" width="322" height="48"/>
+                                <rect key="frame" x="510" y="34" width="343" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Play Now" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="vpi-9f-fXe">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Play_Now" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="vpi-9f-fXe">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -143,7 +121,7 @@
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xxa-uV-8Qe">
-                                <rect key="frame" x="162" y="121" width="65" height="44"/>
+                                <rect key="frame" x="153" y="57" width="65" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="180" drawsBackground="YES" id="4HH-f1-fnQ">
                                     <font key="font" metaFont="system" size="30"/>
@@ -152,7 +130,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EA0-hg-FRc">
-                                <rect key="frame" x="161" y="101" width="66" height="21"/>
+                                <rect key="frame" x="154" y="34" width="66" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Time" id="puW-xu-pdk">
                                     <font key="font" metaFont="system" size="17"/>
@@ -171,26 +149,15 @@
                                     <action selector="abtnQuit:" target="XlH-uh-09R" id="GlX-67-mIf"/>
                                 </connections>
                             </button>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ygw-dd-lXN" userLabel="abtnPoint">
-                                <rect key="frame" x="758" y="131" width="70" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="KE9-oB-TvC">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="abtnPoint:" target="XlH-uh-09R" id="6GT-Ah-q3f"/>
-                                </connections>
-                            </button>
                             <scrollView wantsLayer="YES" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ki-b8-8E7" userLabel="List table">
-                                <rect key="frame" x="48" y="192" width="805" height="260"/>
+                                <rect key="frame" x="48" y="142" width="805" height="310"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <clipView key="contentView" ambiguous="YES" id="WZF-Fz-C7t">
-                                    <rect key="frame" x="1" y="0.0" width="803" height="259"/>
+                                    <rect key="frame" x="1" y="0.0" width="803" height="309"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView identifier="listVocabulary" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="d1C-UK-Qfm" viewBased="YES" id="eoX-YX-xVQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="803" height="236"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="803" height="286"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -464,7 +431,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9be-H5-S0h" userLabel="RemoveAll">
-                                <rect key="frame" x="674" y="94" width="95" height="32"/>
+                                <rect key="frame" x="764" y="88" width="95" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Clear" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NDK-d5-7Yy">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -472,6 +439,17 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="abtnClear:" target="XlH-uh-09R" id="l5C-zJ-uY7"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O2s-0O-VoM">
+                                <rect key="frame" x="585" y="88" width="94" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Update" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="8rg-Wg-zkM">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system" size="20"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="abtnUpdate:" target="XlH-uh-09R" id="7UR-Tc-LtE"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -485,6 +463,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnAuto" destination="fMB-pB-WJm" id="YJU-wj-257"/>
+                        <outlet property="btnClear" destination="9be-H5-S0h" id="CDi-hE-0CI"/>
+                        <outlet property="btnInsert" destination="z9a-rX-whD" id="PG0-cu-JNv"/>
+                        <outlet property="btnPlayNow" destination="cgn-UV-Pvu" id="svI-FV-Cxo"/>
+                        <outlet property="btnUpdate" destination="O2s-0O-VoM" id="dol-99-Zir"/>
                         <outlet property="labelPoint" destination="gAf-x1-4ep" id="9c0-bd-Mzg"/>
                         <outlet property="listTable" destination="eoX-YX-xVQ" id="WfV-n2-eGM"/>
                         <outlet property="searchBar" destination="z3q-JD-IJz" id="s9M-i7-6z5"/>
@@ -566,11 +549,8 @@
     </scenes>
     <resources>
         <image name="ColorRose" width="360" height="40"/>
-        <image name="Delete" width="100" height="35"/>
-        <image name="Insert" width="100" height="35"/>
         <image name="Mask2" width="900" height="550"/>
-        <image name="Play Now" width="402" height="50"/>
-        <image name="Update" width="100" height="35"/>
+        <image name="Play_Now" width="402" height="50"/>
         <image name="blue" width="900" height="550"/>
         <image name="exit" width="128" height="128"/>
         <image name="greenWeak" width="900" height="550"/>

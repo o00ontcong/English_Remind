@@ -7,7 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "VocabularyModel.h"
 @interface ShowWindowController : NSWindowController
+@property (strong, nonatomic)VocabularyModel *vocabulary;
+@property (weak) IBOutlet NSTextField *textVietnamese;
+@property (weak) IBOutlet NSTextField *textEnglish;
+@property (weak) IBOutlet NSTextField *textfieldInput;
+@property (copy, nonatomic) void (^callBackBlock)(BOOL result, VocabularyModel *vocabulary);
+- (IBAction)closeAction:(id)sender;
+
+
+- (IBAction)textfieldInputAction:(id)sender;
 
 @end

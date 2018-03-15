@@ -10,8 +10,8 @@
 #import "Utility.h"
 #import "SQLiteLibrary.h"
 #import "AddTypeWindowController.h"
-
+#import "VocabularyModel.h"
 @interface AddVocabularyViewController : NSWindowController
 - (IBAction)ActionEnglish:(id)sender;
-
+@property (strong, nonatomic) VocabularyModel *vocabulary;
 @end

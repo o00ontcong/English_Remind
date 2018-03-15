@@ -8,7 +8,9 @@
 
 #import "ShowWindowController.h"
 
-@interface ShowWindowController ()
+@interface ShowWindowController (){
+    BOOL result;
+}
 
 @end
 
@@ -17,7 +19,38 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    
+}
+-(void)showWindow:(id)sender{
+    [super showWindow:sender];
+    self.textVietnamese.stringValue = self.vocabulary.vietnamese;
+    result = YES;
+}
+- (IBAction)closeAction:(id)sender {
+    [self close];
+}
+
+- (IBAction)textfieldInputAction:(id)sender {
+    NSCharacterSet * alphaNumSet = [NSCharacterSet characterSetWithCharactersInString:@"!@#$%^&*?.,'~-=_+()[]/<>:;"];
+
+    NSString *stringValue = self.textfieldInput.stringValue.lowercaseString;
+    stringValue = [stringValue stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    stringValue = [stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    stringValue = [stringValue stringByTrimmingCharactersInSet:alphaNumSet];
+    
+    NSString *vocabulary = self.vocabulary.english.lowercaseString;
+    vocabulary = [vocabulary stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    vocabulary = [vocabulary stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    vocabulary = [vocabulary stringByTrimmingCharactersInSet:alphaNumSet];
+    
+    if ([stringValue isEqualToString:vocabulary]){
+        self.callBackBlock(result,self.vocabulary);
+        [self close];
+        return;
+    } else {
+        result = NO;
+        self.textEnglish.stringValue = self.vocabulary.english;
+    }
 }
 
 @end

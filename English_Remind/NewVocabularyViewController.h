@@ -14,5 +14,8 @@
 #import "FavoriteTableCellView.h"
 @interface NewVocabularyViewController : NSViewController
 @property (weak) IBOutlet NSTextField *searchBar;
+@property (weak) IBOutlet NSButton *btnInsert;
+@property (weak) IBOutlet NSButton *btnUpdate;
+@property (weak) IBOutlet NSButton *btnClear;
 
 @end

@@ -42,9 +42,12 @@
 - (IBAction)showWindow:(id)sender
 {
     [super showWindow:sender];
-    
+    if (self.vocabulary){
+        self.englishTextField.stringValue = self.vocabulary.english;
+        self.vietnameseTextField.stringValue = self.vocabulary.vietnamese;
+        self.selectTypeName.stringValue = self.vocabulary.type;
+    }
 
-    
 }
 - (IBAction)addAction:(id)sender {
     
@@ -62,8 +65,6 @@
         return;
     }
     
-    [SQLiteLibrary setDatabaseFileInDocuments:@"NewVocabulary.sqlite"];
-    [SQLiteLibrary begin];
     
     NSMutableDictionary *dict = [NSMutableDictionary new];
     dict[@"english"] = englishTextFieldString;
@@ -72,12 +73,21 @@
     dict[@"favorite"] = false;
     dict[@"audio"] = [NSString stringWithFormat:@"audio/%@",englishTextFieldString];
     dict[@"done"] = 0;
-    
-    int64_t temp =  [SQLiteLibrary performInsertQueryInTable:@"Vocabulary" data:dict];
+    int64_t temp;
+    [SQLiteLibrary begin];
+    if (self.vocabulary){
+        dict[@"id"] = [NSString stringWithFormat:@"%li",(long)self.vocabulary.ID];
+        temp =  [SQLiteLibrary performUpdateQueryInTable:@"Vocabulary" data:dict idColumn:@"id"];
+        
+    } else {
+        temp =  [SQLiteLibrary performInsertQueryInTable:@"Vocabulary" data:dict];
+    }
+    [SQLiteLibrary commit];
+
     if (temp >= 0){
         if ((self.isMultiple.state == 0)){
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"NewVocabularyViewControllerRefresh" object:nil];
-        [self close];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"NewVocabularyViewControllerRefresh" object:nil];
+            [self close];
         } else {
             self.notifyLabel.stringValue = @"Successfull";
             self.englishTextField.stringValue = @"";
@@ -87,8 +97,8 @@
     } else {
         self.notifyLabel.stringValue = @"Something wrong";
     }
-    [SQLiteLibrary commit];
     
+
 }
 
 - (IBAction)cloaseAction:(id)sender {

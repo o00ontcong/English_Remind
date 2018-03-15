@@ -14,54 +14,56 @@
 @interface NewVocabularyViewController ()<NSTableViewDelegate,NSTableViewDataSource,NSTextFieldDelegate>{
     ShowWindowController *showVC;
     AddVocabularyViewController *addVC;
+    NSInteger selectedIndex;
+    BOOL isFirstRun;
 }
 
 @property (weak) IBOutlet NSTableView *listTable;
-
 @property (weak) IBOutlet NSTextField *labelPoint;
 @property (weak) IBOutlet NSTextField *textFieldTime;
+@property (weak) IBOutlet NSButton *btnAuto;
+@property (nonatomic, strong) NSTimer *timerForLoopStatus;
+@property (weak) IBOutlet NSButton *btnPlayNow;
 
 
 - (IBAction)abtnAuto:(id)sender;
 - (IBAction)abtnClear:(id)sender;
 
 - (IBAction)abtnInsert:(id)sender;
-- (IBAction)abtnDelete:(id)sender;
 - (IBAction)abtnUpdate:(id)sender;
 
 - (IBAction)abtnQuit:(id)sender;
 - (IBAction)abtnPlayNow:(id)sender;
 
-- (IBAction)abtnPoint:(id)sender;
 
 @end
 
 @implementation NewVocabularyViewController
 
-NSMutableArray *vocabularys, *selectedArray, *originVocalarys;
+NSMutableArray *vocabularys, *selectedArray, *originVocabularys, *counterVocabulary;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
     [self.searchBar setDelegate:self]; // or whatever object you want
-
     selectedArray = [[NSMutableArray alloc] init];
-    originVocalarys = [[NSMutableArray alloc] init];
+    originVocabularys = [[NSMutableArray alloc] init];
     vocabularys = [[NSMutableArray alloc] init];
+    counterVocabulary = [[NSMutableArray alloc] init];
     [self windowRefresh:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowRefresh:) name:@"NewVocabularyViewControllerRefresh" object:nil];
-    
+    selectedIndex = -1;
     
 }
 - (void)windowRefresh:(NSNotification *)notification {
     [self loadDataFromSQLite];
-
+    
 }
 - (void)loadDataFromSQLite {
     
     [SQLiteLibrary setDatabaseFileInDocuments:@"NewVocabulary.sqlite"];
     [vocabularys removeAllObjects];
-    [originVocalarys removeAllObjects];
+    [originVocabularys removeAllObjects];
     [SQLiteLibrary begin];
     [SQLiteLibrary performQuery:@"SELECT * FROM Vocabulary" block:^(sqlite3_stmt *rowData) {
         VocabularyModel * vocabularyModel = [[VocabularyModel alloc] init];
@@ -70,16 +72,22 @@ NSMutableArray *vocabularys, *selectedArray, *originVocalarys;
         vocabularyModel.vietnamese = sqlite3_column_nsstring(rowData, 2);
         vocabularyModel.type = sqlite3_column_nsstring(rowData, 3);
         vocabularyModel.isFavorite = sqlite3_column_int(rowData, 4);
-        [originVocalarys addObject:vocabularyModel];
+        [originVocabularys addObject:vocabularyModel];
         
     }];
     [SQLiteLibrary commit];
     
-    vocabularys = [originVocalarys mutableCopy];
+    vocabularys = [originVocabularys mutableCopy];
     [self.listTable  reloadData];
 }
 #pragma mark TableView Delegate DataSource
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
+    if (vocabularys.count > 0){
+        if (!isFirstRun){
+            [self abtnAuto:self.btnAuto];
+            isFirstRun = YES;
+        }
+    }
     return vocabularys.count;
 }
 
@@ -102,7 +110,7 @@ NSMutableArray *vocabularys, *selectedArray, *originVocalarys;
         [cell.btnFavorite setAction:@selector(abtnFavoriteRow:)];
         [cell.btnFavorite setState: vocabularyModel.isFavorite];
         return cell;
-
+        
     }
     else if ([identifierStr isEqualToString: @"select"]){
         SelectTableCellView *cell = [tableView makeViewWithIdentifier:identifierStr owner:self];
@@ -126,16 +134,22 @@ NSMutableArray *vocabularys, *selectedArray, *originVocalarys;
     }
     return cell;
 }
+
+- (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row{
+    selectedIndex = row;
+    return YES;
+}
+
 #pragma mark Action Button
 - (IBAction)abtnDeleteRow:(id)sender {
     NSButton *delete = sender;
     NSLog(@"🔴%li",(long)delete.tag);
     VocabularyModel * vocabularyModel = (VocabularyModel*)vocabularys[delete.tag];
     NSString * sql = [NSString stringWithFormat:@"DELETE FROM Vocabulary WHERE id = %li",(long)vocabularyModel.ID];
-
+    
     [SQLiteLibrary begin];
     [SQLiteLibrary performQuery: sql block:^(sqlite3_stmt *rowData) {
-       
+        
     }];
     [SQLiteLibrary commit];
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -146,7 +160,7 @@ NSMutableArray *vocabularys, *selectedArray, *originVocalarys;
 - (IBAction)abtnFavoriteRow:(id)sender {
     NSButton *select = sender;
     VocabularyModel * vocabularyModel = (VocabularyModel*)vocabularys[select.tag] ;
-
+    
     NSString *sql = [NSString stringWithFormat:@"UPDATE Vocabulary SET favorite = '%ld' WHERE id = %li",(long)select.state, vocabularyModel.ID];
     [SQLiteLibrary begin];
     [SQLiteLibrary performQuery: sql block:^(sqlite3_stmt *rowData) {
@@ -180,9 +194,9 @@ NSMutableArray *vocabularys, *selectedArray, *originVocalarys;
                 break;
             }
         }
-
+        
     }
-   
+    
 }
 - (IBAction)abtnAdd:(id)sender {
     
@@ -193,7 +207,7 @@ NSMutableArray *vocabularys, *selectedArray, *originVocalarys;
 
 - (IBAction)abtnAuto:(id)sender {
     [self loadDataFromSQLite];
-
+    
     [selectedArray removeAllObjects];
     for (VocabularyModel *vocabulary in vocabularys) {
         if (vocabulary.isFavorite == TRUE){
@@ -204,8 +218,25 @@ NSMutableArray *vocabularys, *selectedArray, *originVocalarys;
             return;
         }
     }
+    for (VocabularyModel *vocabulary in vocabularys) {
+        BOOL isExist = NO;
+        for (VocabularyModel *voca in selectedArray){
+            if (vocabulary.ID == voca.ID){
+                isExist = YES;
+                break;
+            }
+        }
+        if (!isExist){
+            [selectedArray addObject:vocabulary];
+        }
+        if ([selectedArray count] >= 10){
+            [self.listTable reloadData];
+            return;
+        }
+    }
+    
     [self.listTable reloadData];
-
+    
 }
 
 - (IBAction)abtnClear:(id)sender {
@@ -221,10 +252,17 @@ NSMutableArray *vocabularys, *selectedArray, *originVocalarys;
     
 }
 
-- (IBAction)abtnDelete:(id)sender {
-}
+
 
 - (IBAction)abtnUpdate:(id)sender {
+    if (selectedIndex >= 0){
+        addVC = [[AddVocabularyViewController alloc] initWithWindowNibName:@"AddVocabularyViewController"];
+        addVC.window.level = CGWindowLevelForKey(kCGMaximumWindowLevelKey);
+        addVC.vocabulary = vocabularys[selectedIndex];
+        [addVC showWindow:self];
+    }else {
+        [self showAlertWithMessage:@"Warning" andInformative:@"Please choice 1 Item." andBlock:nil];
+    }
 }
 
 - (IBAction)abtnQuit:(id)sender {
@@ -232,28 +270,124 @@ NSMutableArray *vocabularys, *selectedArray, *originVocalarys;
 }
 
 - (IBAction)abtnPlayNow:(id)sender {
-    showVC = [[ShowWindowController alloc] initWithWindowNibName:@"ShowWindowController"];
-    showVC.window.level = CGWindowLevelForKey(kCGMaximumWindowLevelKey);
-    [showVC showWindow:self];
+    if ([selectedArray count] > 0){
+        if (self.timerForLoopStatus){
+            [self isEnableButton:YES];
+            self.btnPlayNow.image = [NSImage imageNamed:@"Play_Now"];
+            if ([self.timerForLoopStatus isValid]){
+                [self.timerForLoopStatus invalidate];
+            }
+            self.timerForLoopStatus = nil;
+        } else {
+            [self isEnableButton:NO];
+            self.btnPlayNow.image = [NSImage imageNamed:@"Stop"];
+            [self autoPlayNow];
+            self.timerForLoopStatus = [NSTimer scheduledTimerWithTimeInterval:self.textFieldTime.stringValue.intValue repeats:YES block:^(NSTimer * _Nonnull timer) {
+                if (![showVC.window isVisible]) {
+                    [self autoPlayNow];
+                }
+            }];
+        }
+        
+        
+    } else {
+        [self showAlertWithMessage:@"Warning" andInformative:@"Please choice vocabulary" andBlock:nil];
+        
+    }
 }
 
-- (IBAction)abtnPoint:(id)sender {
-    NSLog(@"Point:");
-}
 #pragma mark Methods privacy
--(void)autoSelectionAction:(NSNotification *)notification{
+-(void)isEnableButton:(BOOL)isEnable{
+    self.btnAuto.enabled = isEnable;
+    self.btnClear.enabled = isEnable;
+    self.btnInsert.enabled = isEnable;
+    self.btnUpdate.enabled = isEnable;
+}
+-(void)autoPlayNow{
+    showVC = [[ShowWindowController alloc] initWithWindowNibName:@"ShowWindowController"];
+    showVC.window.level = CGWindowLevelForKey(kCGMaximumWindowLevelKey);
     
+    NSUInteger n = [selectedArray count];
+    if (n <= 0){
+        if (!self.timerForLoopStatus){
+            [self showAlertWithMessage:@"Warning" andInformative:@"Please choice vocabulary" andBlock:nil];
+        } else {
+            self.btnPlayNow.image = [NSImage imageNamed:@"Play_Now"];
+            if ([self.timerForLoopStatus isValid]){
+                [self.timerForLoopStatus invalidate];
+            }
+            self.timerForLoopStatus = nil;
+            [self showAlertWithMessage:@"Warning" andInformative:@"Done" andBlock:nil];
+            [self.listTable reloadData];
+            
+        }
+    } else {
+        showVC.vocabulary = selectedArray[arc4random() % n];
+        __weak typeof(self) weakSelf = self;
+        showVC.callBackBlock = ^(BOOL result,VocabularyModel *vocabulary){
+            if (result){
+                [counterVocabulary addObject:vocabulary];
+                NSCountedSet *set = [[NSCountedSet alloc] initWithArray:counterVocabulary];
+                NSUInteger count = [set countForObject:vocabulary];
+                if (count >=1){
+                    //remove item from list array
+                    for (NSInteger i = selectedArray.count - 1; i >= 0; i--) {
+                        VocabularyModel *tempVoca = selectedArray[i];
+                        if (tempVoca.ID == vocabulary.ID){
+                            [selectedArray removeObjectAtIndex:i];
+                            break;
+                        }
+                    }
+                    
+                    //update local
+                    NSMutableDictionary *dict = [NSMutableDictionary new];
+                    dict[@"english"] = vocabulary.english;
+                    dict[@"vietnamese"] = vocabulary.vietnamese;
+                    dict[@"type"] = vocabulary.type;
+                    dict[@"favorite"] = vocabulary.isFavorite?@"1":@"0";
+                    dict[@"audio"] = vocabulary.audio;
+                    dict[@"done"] = [NSString stringWithFormat:@"%i",1];
+                    dict[@"id"] = [NSString stringWithFormat:@"%li",(long)vocabulary.ID];
+                    
+                    [SQLiteLibrary begin];
+                    [SQLiteLibrary performUpdateQueryInTable:@"Vocabulary" data:dict idColumn:@"id"];
+                    [SQLiteLibrary commit];
+                    [weakSelf showAlertWithMessage:@"Warning" andInformative:@"Please choice vocabulary" andBlock:nil];
+                    if ([selectedArray count] <=0){
+                        weakSelf.btnPlayNow.image = [NSImage imageNamed:@"Play_Now"];
+                        if ([weakSelf.timerForLoopStatus isValid]){
+                            [weakSelf.timerForLoopStatus invalidate];
+                        }
+                        weakSelf.timerForLoopStatus = nil;
+                        [weakSelf.listTable reloadData];
+                    }
+                    return ;
+                }
+            }
+        };
+        [showVC showWindow:self];
+    }
 }
 - (void)controlTextDidChange:(NSNotification *)notification {
     NSTextField *textField = [notification object];
     if (![[textField stringValue] isEqualToString:@""]){
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.english contains[c] %@",[textField stringValue]];
-    vocabularys = [NSMutableArray arrayWithArray:[originVocalarys filteredArrayUsingPredicate:predicate]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.english contains[c] %@",[textField stringValue]];
+        vocabularys = [NSMutableArray arrayWithArray:[originVocabularys filteredArrayUsingPredicate:predicate]];
     } else {
-        vocabularys = [originVocalarys mutableCopy];
+        vocabularys = [originVocabularys mutableCopy];
     }
     [self.listTable reloadData];
 }
 
-
+-(void)showAlertWithMessage:(NSString *)message andInformative:(NSString *)informative andBlock:(void (^ __nullable)(NSInteger result))block {
+    NSAlert *alert = [NSAlert new];
+    alert.messageText = message;
+    alert.informativeText = informative;
+    [alert addButtonWithTitle:@"OK"];
+    [alert beginSheetModalForWindow:[self.view window] completionHandler:^(NSInteger result) {
+        if (block != nil){
+            block(result);
+        }
+    }];
+}
 @end
