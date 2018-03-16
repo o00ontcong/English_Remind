@@ -16,6 +16,7 @@
     AddVocabularyViewController *addVC;
     NSInteger selectedIndex;
     BOOL isFirstRun;
+    NSUserDefaults *userDefaults;
 }
 
 @property (weak) IBOutlet NSTableView *listTable;
@@ -24,6 +25,7 @@
 @property (weak) IBOutlet NSButton *btnAuto;
 @property (nonatomic, strong) NSTimer *timerForLoopStatus;
 @property (weak) IBOutlet NSButton *btnPlayNow;
+@property (weak) IBOutlet NSTextField *textfieldInputCounter;
 
 
 - (IBAction)abtnAuto:(id)sender;
@@ -44,8 +46,17 @@ NSMutableArray *vocabularys, *selectedArray, *originVocabularys, *counterVocabul
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
-    [self.searchBar setDelegate:self]; // or whatever object you want
+    userDefaults = [NSUserDefaults standardUserDefaults];
+    if ([userDefaults objectForKey:@"ENGLISH_REMIND_TIME"] == nil){
+        [userDefaults setInteger:0 forKey:@"ENGLISH_REMIND_TIME"];
+    }
+    if ([userDefaults objectForKey:@"ENGLISH_REMIND_COUNTER"] == nil){
+        [userDefaults setInteger:0 forKey:@"ENGLISH_REMIND_COUNTER"];
+    }
+    if ([userDefaults objectForKey:@"ENGLISH_REMIND_POINT"] == nil){
+        [userDefaults setInteger:0 forKey:@"ENGLISH_REMIND_POINT"];
+    }
+    [self.searchBar setDelegate:self];
     selectedArray = [[NSMutableArray alloc] init];
     originVocabularys = [[NSMutableArray alloc] init];
     vocabularys = [[NSMutableArray alloc] init];
@@ -53,11 +64,14 @@ NSMutableArray *vocabularys, *selectedArray, *originVocabularys, *counterVocabul
     [self windowRefresh:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowRefresh:) name:@"NewVocabularyViewControllerRefresh" object:nil];
     selectedIndex = -1;
-    
+
 }
 - (void)windowRefresh:(NSNotification *)notification {
     [self loadDataFromSQLite];
-    
+
+    self.textFieldTime.stringValue =[NSString stringWithFormat:@"%li" ,(long)[userDefaults integerForKey:@"ENGLISH_REMIND_TIME"]];
+    self.textfieldInputCounter.stringValue = [NSString stringWithFormat:@"%li" ,(long)[userDefaults integerForKey:@"ENGLISH_REMIND_COUNTER"] ];
+    self.labelPoint.stringValue = [NSString stringWithFormat:@"%li" ,(long)[userDefaults integerForKey:@"ENGLISH_REMIND_POINT"]];
 }
 - (void)loadDataFromSQLite {
     
@@ -304,6 +318,13 @@ NSMutableArray *vocabularys, *selectedArray, *originVocabularys, *counterVocabul
     self.btnUpdate.enabled = isEnable;
 }
 -(void)autoPlayNow{
+    if ([self.textFieldTime.stringValue intValue] == 0 || [self.textfieldInputCounter.stringValue intValue] == 0){
+        [self showAlertWithMessage:@"Warning" andInformative:@"Please Enter TIME and COUNTER by Number" andBlock:nil];
+        return;
+    }
+    [userDefaults setInteger:[self.textFieldTime.stringValue integerValue] forKey:@"ENGLISH_REMIND_TIME"];
+    [userDefaults setInteger:[self.textfieldInputCounter.stringValue integerValue] forKey:@"ENGLISH_REMIND_COUNTER"];
+
     showVC = [[ShowWindowController alloc] initWithWindowNibName:@"ShowWindowController"];
     showVC.window.level = CGWindowLevelForKey(kCGMaximumWindowLevelKey);
     
@@ -329,7 +350,7 @@ NSMutableArray *vocabularys, *selectedArray, *originVocabularys, *counterVocabul
                 [counterVocabulary addObject:vocabulary];
                 NSCountedSet *set = [[NSCountedSet alloc] initWithArray:counterVocabulary];
                 NSUInteger count = [set countForObject:vocabulary];
-                if (count >=1){
+                if (count >= [self.textfieldInputCounter.stringValue intValue]){
                     //remove item from list array
                     for (NSInteger i = selectedArray.count - 1; i >= 0; i--) {
                         VocabularyModel *tempVoca = selectedArray[i];
@@ -338,7 +359,11 @@ NSMutableArray *vocabularys, *selectedArray, *originVocabularys, *counterVocabul
                             break;
                         }
                     }
+                    NSUserDefaults *myUserDefaults = [NSUserDefaults standardUserDefaults];
                     
+                    NSInteger pointCounter = [myUserDefaults integerForKey:@"ENGLISH_REMIND_POINT"];
+                    [myUserDefaults setInteger:pointCounter + 1 forKey:@"ENGLISH_REMIND_POINT"];
+                    weakSelf.labelPoint.stringValue = [NSString stringWithFormat:@"%li",pointCounter + 1];
                     //update local
                     NSMutableDictionary *dict = [NSMutableDictionary new];
                     dict[@"english"] = vocabulary.english;
@@ -352,15 +377,15 @@ NSMutableArray *vocabularys, *selectedArray, *originVocabularys, *counterVocabul
                     [SQLiteLibrary begin];
                     [SQLiteLibrary performUpdateQueryInTable:@"Vocabulary" data:dict idColumn:@"id"];
                     [SQLiteLibrary commit];
-                    [weakSelf showAlertWithMessage:@"Warning" andInformative:@"Please choice vocabulary" andBlock:nil];
                     if ([selectedArray count] <=0){
+                        [weakSelf showAlertWithMessage:@"Successfully" andInformative:@"Finish! Well done." andBlock:nil];
                         weakSelf.btnPlayNow.image = [NSImage imageNamed:@"Play_Now"];
                         if ([weakSelf.timerForLoopStatus isValid]){
                             [weakSelf.timerForLoopStatus invalidate];
                         }
                         weakSelf.timerForLoopStatus = nil;
-                        [weakSelf.listTable reloadData];
                     }
+                    [weakSelf.listTable reloadData];
                     return ;
                 }
             }
