@@ -12,7 +12,6 @@
 		04AF1F1D1DE13D0A009BA57A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AF1F1C1DE13D0A009BA57A /* AppDelegate.m */; };
 		04AF1F201DE13D0A009BA57A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AF1F1F1DE13D0A009BA57A /* main.m */; };
 		04AF1F341DE13D47009BA57A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04AF1F331DE13D47009BA57A /* Assets.xcassets */; };
-		04AF1F361DE13E28009BA57A /* NMDatePicker in Resources */ = {isa = PBXBuildFile; fileRef = 04AF1F351DE13E28009BA57A /* NMDatePicker */; };
 		04AF1F3B1DE147E2009BA57A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AF1F3A1DE147E2009BA57A /* Main.storyboard */; };
 		04AF1F3E1DE192A3009BA57A /* NewVocabularyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AF1F3D1DE192A3009BA57A /* NewVocabularyViewController.m */; };
 		4810717C204E92A6007C7103 /* AddTypeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4810717A204E92A6007C7103 /* AddTypeWindowController.m */; };
@@ -21,13 +20,18 @@
 		483C09B91FC90CDC00482286 /* ShowWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 483C09B71FC90CDB00482286 /* ShowWindowController.xib */; };
 		483C09BD1FC90F2900482286 /* AddVocabularyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 483C09BB1FC90F2900482286 /* AddVocabularyViewController.m */; };
 		483C09BE1FC90F2900482286 /* AddVocabularyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 483C09BC1FC90F2900482286 /* AddVocabularyViewController.xib */; };
+		484A5F8E205BAE7E006E7047 /* AvailableVocabularyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 484A5F8D205BAE7E006E7047 /* AvailableVocabularyViewController.m */; };
+		484A5F91205BB6A8006E7047 /* MainTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 484A5F90205BB6A8006E7047 /* MainTabViewController.m */; };
+		484A5FAA205BC077006E7047 /* NMDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484A5FA6205BC077006E7047 /* NMDatePicker.swift */; };
+		484A5FAB205BC077006E7047 /* NMDatePickerDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484A5FA7205BC077006E7047 /* NMDatePickerDayView.swift */; };
+		484A5FAC205BC077006E7047 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 484A5FA9205BC077006E7047 /* Info.plist */; };
+		484A5FAE205BD04E006E7047 /* NewVocabulary.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 484A5FAD205BCFF1006E7047 /* NewVocabulary.sqlite */; };
 		489A7ADB2057713600396C51 /* DeleteTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 489A7ADA2057713600396C51 /* DeleteTableCellView.m */; };
 		489A7ADE2057749B00396C51 /* SelectTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 489A7ADD2057749B00396C51 /* SelectTableCellView.m */; };
 		489A7AE12057AEC300396C51 /* FavoriteTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 489A7AE02057AEC300396C51 /* FavoriteTableCellView.m */; };
 		48E5D5F3204E449100140322 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E5D5F2204E449100140322 /* libsqlite3.tbd */; };
 		48E5D5F9204E483900140322 /* SQLiteLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E5D5F8204E483800140322 /* SQLiteLibrary.m */; };
 		48E5D5FC204E78FD00140322 /* AutoEV.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 48E5D5FB204E78FD00140322 /* AutoEV.sqlite */; };
-		48E5D5FD204E790800140322 /* NewVocabulary.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 04AF1F3F1DE1C119009BA57A /* NewVocabulary.sqlite */; };
 		55322FA238D4C61ECB2D5524 /* Pods_English_Remind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C822BC9D39095DCC689BCB4 /* Pods_English_Remind.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,12 +46,10 @@
 		04AF1F1F1DE13D0A009BA57A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04AF1F291DE13D0A009BA57A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04AF1F331DE13D47009BA57A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		04AF1F351DE13E28009BA57A /* NMDatePicker */ = {isa = PBXFileReference; lastKnownFileType = folder; path = NMDatePicker; sourceTree = "<group>"; };
 		04AF1F371DE13E41009BA57A /* English_Remind-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "English_Remind-Bridging-Header.h"; sourceTree = "<group>"; };
 		04AF1F3A1DE147E2009BA57A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		04AF1F3C1DE192A3009BA57A /* NewVocabularyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewVocabularyViewController.h; sourceTree = "<group>"; };
 		04AF1F3D1DE192A3009BA57A /* NewVocabularyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewVocabularyViewController.m; sourceTree = "<group>"; };
-		04AF1F3F1DE1C119009BA57A /* NewVocabulary.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = NewVocabulary.sqlite; sourceTree = "<group>"; };
 		432745FD4A6A040498E6604D /* Pods-English_Remind.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-English_Remind.release.xcconfig"; path = "Pods/Target Support Files/Pods-English_Remind/Pods-English_Remind.release.xcconfig"; sourceTree = "<group>"; };
 		48107179204E92A6007C7103 /* AddTypeWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddTypeWindowController.h; sourceTree = "<group>"; };
 		4810717A204E92A6007C7103 /* AddTypeWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddTypeWindowController.m; sourceTree = "<group>"; };
@@ -58,6 +60,15 @@
 		483C09BA1FC90F2900482286 /* AddVocabularyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddVocabularyViewController.h; sourceTree = "<group>"; };
 		483C09BB1FC90F2900482286 /* AddVocabularyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddVocabularyViewController.m; sourceTree = "<group>"; };
 		483C09BC1FC90F2900482286 /* AddVocabularyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddVocabularyViewController.xib; sourceTree = "<group>"; };
+		484A5F8C205BAE7E006E7047 /* AvailableVocabularyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AvailableVocabularyViewController.h; sourceTree = "<group>"; };
+		484A5F8D205BAE7E006E7047 /* AvailableVocabularyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AvailableVocabularyViewController.m; sourceTree = "<group>"; };
+		484A5F8F205BB6A8006E7047 /* MainTabViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabViewController.h; sourceTree = "<group>"; };
+		484A5F90205BB6A8006E7047 /* MainTabViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabViewController.m; sourceTree = "<group>"; };
+		484A5FA6205BC077006E7047 /* NMDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NMDatePicker.swift; sourceTree = "<group>"; };
+		484A5FA7205BC077006E7047 /* NMDatePickerDayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NMDatePickerDayView.swift; sourceTree = "<group>"; };
+		484A5FA8205BC077006E7047 /* NMDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMDatePicker.h; sourceTree = "<group>"; };
+		484A5FA9205BC077006E7047 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		484A5FAD205BCFF1006E7047 /* NewVocabulary.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = NewVocabulary.sqlite; sourceTree = "<group>"; };
 		489A7AD92057713600396C51 /* DeleteTableCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeleteTableCellView.h; sourceTree = "<group>"; };
 		489A7ADA2057713600396C51 /* DeleteTableCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeleteTableCellView.m; sourceTree = "<group>"; };
 		489A7ADC2057749B00396C51 /* SelectTableCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectTableCellView.h; sourceTree = "<group>"; };
@@ -156,6 +167,8 @@
 		4810717F204E9839007C7103 /* Available Vocabulary */ = {
 			isa = PBXGroup;
 			children = (
+				484A5F8C205BAE7E006E7047 /* AvailableVocabularyViewController.h */,
+				484A5F8D205BAE7E006E7047 /* AvailableVocabularyViewController.m */,
 			);
 			name = "Available Vocabulary";
 			sourceTree = "<group>";
@@ -167,7 +180,7 @@
 				02B472501FCD135E00A3131F /* Utility.m */,
 				48E5D5F7204E483800140322 /* SQLiteLibrary.h */,
 				48E5D5F8204E483800140322 /* SQLiteLibrary.m */,
-				04AF1F351DE13E28009BA57A /* NMDatePicker */,
+				484A5FA5205BC077006E7047 /* NMDatePicker */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -175,8 +188,8 @@
 		48107182204E98EF007C7103 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				04AF1F3F1DE1C119009BA57A /* NewVocabulary.sqlite */,
 				48E5D5FB204E78FD00140322 /* AutoEV.sqlite */,
+				484A5FAD205BCFF1006E7047 /* NewVocabulary.sqlite */,
 			);
 			name = Resource;
 			sourceTree = "<group>";
@@ -190,8 +203,21 @@
 				483C09B61FC90CDB00482286 /* ShowWindowController.m */,
 				483C09B71FC90CDB00482286 /* ShowWindowController.xib */,
 				04AF1F3A1DE147E2009BA57A /* Main.storyboard */,
+				484A5F8F205BB6A8006E7047 /* MainTabViewController.h */,
+				484A5F90205BB6A8006E7047 /* MainTabViewController.m */,
 			);
 			name = General;
+			sourceTree = "<group>";
+		};
+		484A5FA5205BC077006E7047 /* NMDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				484A5FA6205BC077006E7047 /* NMDatePicker.swift */,
+				484A5FA7205BC077006E7047 /* NMDatePickerDayView.swift */,
+				484A5FA8205BC077006E7047 /* NMDatePicker.h */,
+				484A5FA9205BC077006E7047 /* Info.plist */,
+			);
+			path = NMDatePicker;
 			sourceTree = "<group>";
 		};
 		489A7AE22057AECB00396C51 /* TableVIewCell */ = {
@@ -290,13 +316,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				484A5FAC205BC077006E7047 /* Info.plist in Resources */,
 				483C09B91FC90CDC00482286 /* ShowWindowController.xib in Resources */,
 				48E5D5FC204E78FD00140322 /* AutoEV.sqlite in Resources */,
 				04AF1F341DE13D47009BA57A /* Assets.xcassets in Resources */,
 				4810717D204E92A6007C7103 /* AddTypeWindowController.xib in Resources */,
-				48E5D5FD204E790800140322 /* NewVocabulary.sqlite in Resources */,
-				04AF1F361DE13E28009BA57A /* NMDatePicker in Resources */,
 				04AF1F3B1DE147E2009BA57A /* Main.storyboard in Resources */,
+				484A5FAE205BD04E006E7047 /* NewVocabulary.sqlite in Resources */,
 				483C09BE1FC90F2900482286 /* AddVocabularyViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,14 +434,18 @@
 				02B4725A1FCD1DB400A3131F /* VocabularyModel.m in Sources */,
 				489A7ADE2057749B00396C51 /* SelectTableCellView.m in Sources */,
 				48E5D5F9204E483900140322 /* SQLiteLibrary.m in Sources */,
+				484A5FAB205BC077006E7047 /* NMDatePickerDayView.swift in Sources */,
 				483C09B81FC90CDC00482286 /* ShowWindowController.m in Sources */,
 				489A7AE12057AEC300396C51 /* FavoriteTableCellView.m in Sources */,
+				484A5F8E205BAE7E006E7047 /* AvailableVocabularyViewController.m in Sources */,
 				04AF1F201DE13D0A009BA57A /* main.m in Sources */,
 				04AF1F1D1DE13D0A009BA57A /* AppDelegate.m in Sources */,
 				483C09BD1FC90F2900482286 /* AddVocabularyViewController.m in Sources */,
 				02B472511FCD135E00A3131F /* Utility.m in Sources */,
 				04AF1F3E1DE192A3009BA57A /* NewVocabularyViewController.m in Sources */,
 				4810717C204E92A6007C7103 /* AddTypeWindowController.m in Sources */,
+				484A5F91205BB6A8006E7047 /* MainTabViewController.m in Sources */,
+				484A5FAA205BC077006E7047 /* NMDatePicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,7 +552,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "English_Remind/English_Remind-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -538,7 +568,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "o00ontcong.English-Remind";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "English_Remind/English_Remind-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SQLiteLibrary.h"
-
+#import "VocabularyModel.h"
 @interface Utility : NSObject
 
 @end

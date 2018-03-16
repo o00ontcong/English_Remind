@@ -49,7 +49,7 @@ NSString* sqlite3_column_nsstring(sqlite3_stmt* statement, int column)
 
 @implementation SQLiteLibrary
 {
-    NSString* dbFilePath_ , *dbFilename_;
+    NSString* dbFilePath_ , *dbFileName_;
 }
 
 static SQLiteLibrary* _instance;
@@ -73,14 +73,14 @@ static SQLiteLibrary* _instance;
     [self setDatabaseFile:appFile];
 
 }
-+ (void)setDatabaseFileInDocuments:(NSString *)dbFilename
++ (void)setDatabaseFileInDocuments:(NSString *)dbFileName
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *directory = [paths objectAtIndex:0];
-    NSString* appFile = [directory stringByAppendingPathComponent:dbFilename];
-    [self setDatabaseFile:appFile dbFilename:dbFilename];
+    NSString* appFile = [directory stringByAppendingPathComponent:dbFileName];
+    [self setDatabaseFile:appFile dbFileName:dbFileName];
 }
-+ (void)setDatabaseFile:(NSString *)dbFilePath dbFilename:(NSString *)dbFilename
++ (void)setDatabaseFile:(NSString *)dbFilePath dbFileName:(NSString *)dbFileName
 {
     SQLiteLibrary * me = [self singleton];
     @synchronized (self)
@@ -92,9 +92,9 @@ static SQLiteLibrary* _instance;
 
         me->dbFilePath_ = [dbFilePath copy];
         
-        me->dbFilename_ = nil;
+        me->dbFileName_ = nil;
         
-        me->dbFilePath_ = [dbFilePath copy];
+        me->dbFileName_ = [dbFileName copy];
     }
 }
 
@@ -539,7 +539,7 @@ static SQLiteLibrary* _instance;
 	NSLog(@"Using sqlite database at path %@", dbFilePath_);
 #endif
 
-    NSString* defaultDB = [[NSBundle mainBundle] pathForResource:dbFilename_ ofType:@"sqlite"];
+    NSString* defaultDB = [[NSBundle mainBundle] pathForResource:dbFileName_ ofType:@"sqlite"];
 
     NSString* appFile = dbFilePath_;
     BOOL exists = [[NSFileManager defaultManager]fileExistsAtPath:appFile];

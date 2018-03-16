@@ -39,12 +39,12 @@
         self.labelWaring.stringValue = @"";
     }
     
-    [SQLiteLibrary setDatabaseFileInDocuments:@"NewVocabulary.sqlite"];
+//    [SQLiteLibrary setDatabaseFileInDocuments:@"NewVocabulary.sqlite"];
     [SQLiteLibrary begin];
     
     NSMutableDictionary *dict = [NSMutableDictionary new];
-    dict[@"typeName"] = textFieldInputString;
-    
+    dict[@"TypeName"] = textFieldInputString;
+    dict[@"Favorite"] = 0;
     int64_t temp =  [SQLiteLibrary performInsertQueryInTable:@"Type" data:dict];
     if (temp >= 0){
         [[NSNotificationCenter defaultCenter] postNotificationName:@"AddVocabularyViewControllerRefresh" object:nil];

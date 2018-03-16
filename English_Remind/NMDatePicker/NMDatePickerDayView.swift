@@ -40,7 +40,7 @@ open class NMDatePickerDayView: NSView {
     open var markColor: NSColor?
     
     // Callback actions
-    var daySelectedAction: ((Void) -> (Void))?
+    var daySelectedAction: (() -> (Void))?
     var dayHighlightedAction: ((Bool) -> (Void))?
     
     
@@ -77,7 +77,7 @@ open class NMDatePickerDayView: NSView {
         
         
     }
-
+    
     public required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -91,16 +91,16 @@ open class NMDatePickerDayView: NSView {
         
     }
     
-
+    
     override open func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
-
+        
         // Rectangular selection
-//        var frameRect = CGRectInset(dirtyRect, 1, 1)
-//        frameRect.origin.x += 0.5
-//        frameRect.origin.y += 0.5
-//        let path = NSBezierPath(rect:frameRect)
-
+        //        var frameRect = CGRectInset(dirtyRect, 1, 1)
+        //        frameRect.origin.x += 0.5
+        //        frameRect.origin.y += 0.5
+        //        let path = NSBezierPath(rect:frameRect)
+        
         
         // Circle selection
         let width = self.bounds.height * 0.9
@@ -195,9 +195,10 @@ open class NMDatePickerDayView: NSView {
         if self.trackingArea != nil {
             self.removeTrackingArea(self.trackingArea!)
         }
-        let opts: NSTrackingAreaOptions = [NSTrackingAreaOptions.mouseEnteredAndExited, NSTrackingAreaOptions.activeAlways]
+        let opts: NSTrackingArea.Options = [NSTrackingArea.Options.mouseEnteredAndExited, NSTrackingArea.Options.activeAlways]
         self.trackingArea = NSTrackingArea(rect: self.bounds, options: opts, owner: self, userInfo: nil)
         self.addTrackingArea(self.trackingArea!)
         
     }
 }
+
