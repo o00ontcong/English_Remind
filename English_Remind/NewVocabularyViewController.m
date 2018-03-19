@@ -75,8 +75,8 @@ NSMutableArray *vocabularys, *selectedArray, *originVocabularys, *counterVocabul
 }
 - (void)loadDataFromSQLite {
     
-    [SQLiteLibrary setDatabaseFileInDocuments:@"NewVocabulary" ofType:@"sqlite"];
-//    [SQLiteLibrary setupDatabaseAndForceReset:YES];
+    [SQLiteLibrary setDatabaseFileInDocuments:@"NewVocabulary"];
+    [SQLiteLibrary setupDatabaseAndForceReset:YES];
     [vocabularys removeAllObjects];
     [originVocabularys removeAllObjects];
     [SQLiteLibrary begin];

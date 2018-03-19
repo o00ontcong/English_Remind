@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "English_Remind-Swift.h"
-
+#import "TypeVocabulary.h"
 @interface AvailableVocabularyViewController : NSViewController <NMDatePickerDelegate>
 
 @property (weak) IBOutlet NSTableView *listTableView;
@@ -18,11 +18,7 @@
 - (IBAction)quitAction:(id)sender;
 @property (weak) IBOutlet NSButton *btnPlayNow;
 - (IBAction)abtnPlayNow:(id)sender;
-@property (weak) IBOutlet NSButton *btnAuto;
-@property (weak) IBOutlet NSButton *btnClear;
 
-- (IBAction)abtnAuto:(id)sender;
-- (IBAction)abtnClear:(id)sender;
 
 @property (weak) IBOutlet NSTextField *textFieldTime;
 @property (nonatomic, strong) NSTimer *timerForLoopStatus;

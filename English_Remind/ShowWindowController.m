@@ -48,7 +48,7 @@
         [self close];
         return;
     } else {
-        result = NO;
+        result = YES;
         self.textEnglish.stringValue = self.vocabulary.english;
     }
 }

@@ -32,6 +32,7 @@
 		48E5D5F3204E449100140322 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E5D5F2204E449100140322 /* libsqlite3.tbd */; };
 		48E5D5F9204E483900140322 /* SQLiteLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E5D5F8204E483800140322 /* SQLiteLibrary.m */; };
 		48E5D5FC204E78FD00140322 /* AutoEV.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 48E5D5FB204E78FD00140322 /* AutoEV.sqlite */; };
+		48F26D85205FA5FF00B73B9F /* TypeVocabulary.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F26D84205FA5FF00B73B9F /* TypeVocabulary.m */; };
 		55322FA238D4C61ECB2D5524 /* Pods_English_Remind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C822BC9D39095DCC689BCB4 /* Pods_English_Remind.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,8 @@
 		48E5D5F7204E483800140322 /* SQLiteLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteLibrary.h; sourceTree = "<group>"; };
 		48E5D5F8204E483800140322 /* SQLiteLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteLibrary.m; sourceTree = "<group>"; };
 		48E5D5FB204E78FD00140322 /* AutoEV.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = AutoEV.sqlite; sourceTree = "<group>"; };
+		48F26D83205FA5FF00B73B9F /* TypeVocabulary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TypeVocabulary.h; sourceTree = "<group>"; };
+		48F26D84205FA5FF00B73B9F /* TypeVocabulary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TypeVocabulary.m; sourceTree = "<group>"; };
 		9C822BC9D39095DCC689BCB4 /* Pods_English_Remind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_English_Remind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF898AB6AAF5D75E96A1E925 /* Pods-English_Remind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-English_Remind.debug.xcconfig"; path = "Pods/Target Support Files/Pods-English_Remind/Pods-English_Remind.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +147,8 @@
 			children = (
 				02B472581FCD1DB400A3131F /* VocabularyModel.h */,
 				02B472591FCD1DB400A3131F /* VocabularyModel.m */,
+				48F26D83205FA5FF00B73B9F /* TypeVocabulary.h */,
+				48F26D84205FA5FF00B73B9F /* TypeVocabulary.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -431,6 +436,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48F26D85205FA5FF00B73B9F /* TypeVocabulary.m in Sources */,
 				489A7ADB2057713600396C51 /* DeleteTableCellView.m in Sources */,
 				02B4725A1FCD1DB400A3131F /* VocabularyModel.m in Sources */,
 				489A7ADE2057749B00396C51 /* SelectTableCellView.m in Sources */,
