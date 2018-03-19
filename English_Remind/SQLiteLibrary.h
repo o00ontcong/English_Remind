@@ -53,6 +53,7 @@ typedef void (^SQLiteBlock)(sqlite3_stmt *compiledStatement);
 * @param dbFilename path to the database file relative to DOCUMENTS folder
 */
 + (void)setDatabaseFileInDocuments:(NSString *)dbFilename;
++ (void)setDatabaseFileInDocuments:(NSString *)dbFileName ofType:(nullable NSString *)ext;
 
 /**
 * Sets the database file name that will be used for the remainder of the singleton lifetime.

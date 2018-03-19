@@ -80,6 +80,21 @@ static SQLiteLibrary* _instance;
     NSString* appFile = [directory stringByAppendingPathComponent:dbFileName];
     [self setDatabaseFile:appFile dbFileName:dbFileName];
 }
++ (void)setDatabaseFileInDocuments:(NSString *)dbFileName ofType:(nullable NSString *)ext
+{
+    NSString* defaultDB = [[NSBundle mainBundle] pathForResource:dbFileName ofType:ext];
+
+    SQLiteLibrary * me = [self singleton];
+    @synchronized (self)
+    {
+#if !__has_feature(objc_arc)
+        [me->dbFilePath_ release];
+#endif
+        me->dbFilePath_ = nil;
+        
+        me->dbFilePath_ = [defaultDB copy];
+    }
+}
 + (void)setDatabaseFile:(NSString *)dbFilePath dbFileName:(NSString *)dbFileName
 {
     SQLiteLibrary * me = [self singleton];

@@ -70,8 +70,8 @@
     
     [vocabularys removeAllObjects];
     [originVocabularys removeAllObjects];
-    [SQLiteLibrary setDatabaseFileInDocuments:@"AutoEV"];
-    [SQLiteLibrary setupDatabaseAndForceReset:YES];
+    [SQLiteLibrary setDatabaseFileInDocuments:@"AutoEV" ofType:@"sqlite"];
+//    [SQLiteLibrary setupDatabaseAndForceReset:YES];
     [SQLiteLibrary begin];
     [SQLiteLibrary performQuery:@"SELECT * FROM phrases" block:^(sqlite3_stmt *rowData) {
         VocabularyModel * vocabularyModel = [[VocabularyModel alloc] init];

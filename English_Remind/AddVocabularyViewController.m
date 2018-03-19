@@ -120,6 +120,8 @@
 - (void)windowRefresh:(NSNotification *)notification {
     NSMutableArray *arrayItem = [NSMutableArray new];
     __block NSString * currentValue = @"";
+    [SQLiteLibrary setDatabaseFileInDocuments:@"NewVocabulary" ofType:@"sqlite"];
+
     [SQLiteLibrary begin];
     [SQLiteLibrary performQuery:@"SELECT * FROM Type" block:^(sqlite3_stmt *rowData) {
         [arrayItem addObject:sqlite3_column_nsstring(rowData, 1)];
