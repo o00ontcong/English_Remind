@@ -1,27 +1,23 @@
 //
-//  AvailableVocabularyViewController.m
+//  TOEIC700ViewController.m
 //  English_Remind
 //
-//  Created by Cong Nguyen on 16/03/2018.
+//  Created by Cong Nguyen on 20/03/2018.
 //  Copyright © 2018 MAC. All rights reserved.
 //
 
-#import "AvailableVocabularyViewController.h"
-#import "Utility.h"
-#import "FavoriteTableCellView.h"
-#import "ShowWindowController.h"
+#import "TOEIC700ViewController.h"
 
-@interface AvailableVocabularyViewController ()<NSTableViewDelegate,NSTableViewDataSource,NSTextFieldDelegate>{
+@interface TOEIC700ViewController ()<NSTableViewDelegate,NSTableViewDataSource,NSTextFieldDelegate>{
     NSUserDefaults *userDefaults;
-    NSMutableArray *vocabularys, *selectedArray, *originVocabularys, *counterVocabulary, *selectedArrayType;
+    NSMutableArray *selectedArray, *originVocabularys, *counterVocabulary;
     NSInteger selectedIndex;
     ShowWindowController *showVC;
-
+    
 }
-
 @end
 
-@implementation AvailableVocabularyViewController
+@implementation TOEIC700ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,15 +50,13 @@
     self.viewDatePicker.selectedBackgroundColor = [NSColor orangeColor];
     self.viewDatePicker.selectedBorderColor = [NSColor blueColor];
     
-    vocabularys = [[NSMutableArray alloc] init];
     selectedArray = [[NSMutableArray alloc] init];
     originVocabularys = [[NSMutableArray alloc] init];
     counterVocabulary = [[NSMutableArray alloc] init];
-    selectedArrayType = [[NSMutableArray alloc] init];
     [self loadDataFromSQLite];
     [self windowRefresh:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowRefresh:) name:@"NewVocabularyViewControllerRefresh" object:nil];
-
+    
 }
 + (NSString *)shortDateForDate:(NSDate *)date {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -78,7 +72,6 @@
     
 }
 - (void)windowRefresh:(NSNotification *)notification {
-    [self loadSelectArrayWithIndex:selectedIndex];
     self.textFieldTime.stringValue =[NSString stringWithFormat:@"%li" ,(long)[userDefaults integerForKey:@"ENGLISH_REMIND_TIME"]];
     self.textFieldCounter.stringValue = [NSString stringWithFormat:@"%li" ,(long)[userDefaults integerForKey:@"ENGLISH_REMIND_COUNTER"] ];
     self.labelPoint.stringValue = [NSString stringWithFormat:@"%li" ,(long)[userDefaults integerForKey:@"ENGLISH_REMIND_POINT"]];
@@ -88,108 +81,21 @@
 - (void)loadDataFromSQLite {
     
     [originVocabularys removeAllObjects];
-    [SQLiteLibrary setDatabaseFileInDocuments:@"AutoEV" ofType:@"sqlite"];
+    [SQLiteLibrary setDatabaseFileInDocuments:@"700TOEIC" ofType:@"sqlite"];
     [SQLiteLibrary begin];
-    [SQLiteLibrary performQuery:@"SELECT * FROM phrases" block:^(sqlite3_stmt *rowData) {
+    [SQLiteLibrary performQuery:@"SELECT * FROM ZVOCABWORD" block:^(sqlite3_stmt *rowData) {
         VocabularyModel * vocabularyModel = [[VocabularyModel alloc] init];
         vocabularyModel.ID = sqlite3_column_int(rowData, 0);
-        vocabularyModel.english = sqlite3_column_nsstring(rowData, 1);
-        vocabularyModel.english = [self decodeDatabyBase64:vocabularyModel.english];
-        vocabularyModel.vietnamese = sqlite3_column_nsstring(rowData, 2);
-        vocabularyModel.vietnamese = [self decodeDatabyBase64:vocabularyModel.vietnamese];
-
-        vocabularyModel.type = sqlite3_column_nsstring(rowData, 6);
-        vocabularyModel.isFavorite = sqlite3_column_int(rowData, 4);
+        vocabularyModel.english = sqlite3_column_nsstring(rowData, 6);
+        vocabularyModel.vietnamese = sqlite3_column_nsstring(rowData, 5);
+        vocabularyModel.isFavorite = sqlite3_column_int(rowData, 2);
         [originVocabularys addObject:vocabularyModel];
         
     }];
     [SQLiteLibrary commit];
-    [self filterOriginVocabulary:originVocabularys];
-    [self.listTableView reloadData];
-}
-#pragma mark TableView Delegate DataSource
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
-    if (tableView == self.listTableView){
-        return selectedArrayType.count;
-    } else {
-        return vocabularys.count;
-    }
-}
-
-- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row{
-    NSString *identifierStr = tableColumn.identifier;
-    NSTableCellView *cell = [tableView makeViewWithIdentifier:identifierStr owner:self];
-    if (tableView == self.listTableView){
-    TypeVocabulary * typeVocabulary = (TypeVocabulary*)selectedArrayType[row] ;
-    
-        if ([identifierStr isEqualToString: @"number"]){
-            [cell textField].stringValue = [NSString stringWithFormat:@"%ld",(long)typeVocabulary.number];
-        } else if ([identifierStr isEqualToString: @"type"]){
-            [cell textField].stringValue = [NSString stringWithFormat:@"%@",typeVocabulary.type];
-        } else if ([identifierStr isEqualToString: @"totalDone"]){
-            [cell textField].stringValue = [NSString stringWithFormat:@"%ld",typeVocabulary.TotalFavorite];
-        }
-    } else {
-        VocabularyModel *item = vocabularys[row];
-        
-        if ([identifierStr isEqualToString: @"english"]){
-            [cell textField].stringValue = [NSString stringWithFormat:@"%@",item.english];
-        } else if ([identifierStr isEqualToString: @"vietnamese"]){
-            [cell textField].stringValue = [NSString stringWithFormat:@"%@",item.vietnamese];
-        } else if ([identifierStr isEqualToString: @"done"]){
-            FavoriteTableCellView *cell = [tableView makeViewWithIdentifier:identifierStr owner:self];
-            [cell.btnFavorite setTag: row];
-            [cell.btnFavorite setAction:@selector(abtnDoneRow:)];
-            [cell.btnFavorite setState: item.isFavorite];
-            cell.wantsLayer = YES;  // make the cell layer-backed
-            cell.layer.backgroundColor = nil;
-            if ([self isExistInsideSelectedByID:item.ID]){
-                cell.layer.backgroundColor = [[NSColor greenColor] CGColor]; // or whatever color you like
-            }
-
-            return cell;
-        }
-        cell.wantsLayer = YES;  // make the cell layer-backed
-        cell.layer.backgroundColor = nil;
-        if ([self isExistInsideSelectedByID:item.ID]){
-            cell.layer.backgroundColor = [[NSColor greenColor] CGColor]; // or whatever color you like
-        }
-    }
-
-    return cell;
-}
-
-- (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row{
-    if (tableView == self.listTableView){
-    selectedIndex = row;
-    [self loadSelectArrayWithIndex:row];
-    }
-    return YES;
-}
--(void)loadSelectArrayWithIndex:(NSInteger)row{
-    TypeVocabulary *item = selectedArrayType[row];
-    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM phrases WHERE tag == '%@'",item.type];
-    [vocabularys removeAllObjects];
     [selectedArray removeAllObjects];
-    [SQLiteLibrary setDatabaseFileInDocuments:@"AutoEV" ofType:@"sqlite"];
-
-    [SQLiteLibrary begin];
-    [SQLiteLibrary performQuery: sql block:^(sqlite3_stmt *rowData) {
-        VocabularyModel * vocabularyModel = [[VocabularyModel alloc] init];
-        vocabularyModel.ID = sqlite3_column_int(rowData, 0);
-        vocabularyModel.english = sqlite3_column_nsstring(rowData, 1);
-        vocabularyModel.english = [self decodeDatabyBase64:vocabularyModel.english];
-        vocabularyModel.vietnamese = sqlite3_column_nsstring(rowData, 2);
-        vocabularyModel.vietnamese = [self decodeDatabyBase64:vocabularyModel.vietnamese];
-        vocabularyModel.type = sqlite3_column_nsstring(rowData, 6);
-        vocabularyModel.isFavorite = sqlite3_column_int(rowData, 4);
-        [vocabularys addObject:vocabularyModel];
-        
-    }];
-    [SQLiteLibrary commit];
-    
-    for (int i = 0; i < vocabularys.count; i ++) {
-        VocabularyModel * vocabularyModel = vocabularys[i];
+    for (int i = 0; i < originVocabularys.count; i ++) {
+        VocabularyModel * vocabularyModel = originVocabularys[i];
         if (vocabularyModel.isFavorite == NO){
             [selectedArray addObject:vocabularyModel];
         }
@@ -199,12 +105,47 @@
     }
     [self.todayTableView reloadData];
 }
--(void)autoChoiceVocabulary{
-    
+#pragma mark TableView Delegate DataSource
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
+    return originVocabularys.count;
 }
+
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row{
+    NSString *identifierStr = tableColumn.identifier;
+    NSTableCellView *cell = [tableView makeViewWithIdentifier:identifierStr owner:self];
+    
+    VocabularyModel *item = originVocabularys[row];
+    
+    if ([identifierStr isEqualToString: @"english"]){
+        [cell textField].stringValue = [NSString stringWithFormat:@"%@",item.english];
+    } else if ([identifierStr isEqualToString: @"vietnamese"]){
+        [cell textField].stringValue = [NSString stringWithFormat:@"%@",item.vietnamese];
+    } else if ([identifierStr isEqualToString: @"done"]){
+        FavoriteTableCellView *cell = [tableView makeViewWithIdentifier:identifierStr owner:self];
+        [cell.btnFavorite setTag: row];
+        [cell.btnFavorite setAction:@selector(abtnDoneRow:)];
+        [cell.btnFavorite setState: item.isFavorite];
+        cell.wantsLayer = YES;  // make the cell layer-backed
+        cell.layer.backgroundColor = nil;
+        if ([self isExistInsideSelectedByID:item.ID]){
+            cell.layer.backgroundColor = [[NSColor greenColor] CGColor]; // or whatever color you like
+        }
+        
+        return cell;
+    }
+    cell.wantsLayer = YES;  // make the cell layer-backed
+    cell.layer.backgroundColor = nil;
+    if ([self isExistInsideSelectedByID:item.ID]){
+        cell.layer.backgroundColor = [[NSColor greenColor] CGColor]; // or whatever color you like
+    }
+    
+    
+    return cell;
+}
+
 - (IBAction)quitAction:(id)sender {
     [NSApp terminate:nil];
-
+    
 }
 - (IBAction)abtnPlayNow:(id)sender {
     if ([selectedArray count] > 0){
@@ -233,7 +174,6 @@
     }
 }
 -(void)isEnableButton:(BOOL)isEnable{
-    [self.listTableView setEnabled:isEnable];
     [self.todayTableView setEnabled:isEnable];
 }
 -(void)autoPlayNow{
@@ -284,15 +224,31 @@
                     [myUserDefaults setInteger:pointCounter + 1 forKey:@"ENGLISH_REMIND_POINT"];
                     weakSelf.labelPoint.stringValue = [NSString stringWithFormat:@"%li",pointCounter + 1];
                     //update local
-                    NSString *sql = [NSString stringWithFormat:@"UPDATE phrases SET favorite = '%d' WHERE idphrases = %li",1, vocabulary.ID];
+                    [SQLiteLibrary setDatabaseFileInDocuments:@"700TOEIC" ofType:@"sqlite"];
+                    NSString *sql = [NSString stringWithFormat:@"UPDATE ZVOCABWORD SET Z_OPT = '1' WHERE Z_PK = %li", vocabulary.ID];
                     [SQLiteLibrary begin];
                     [SQLiteLibrary performQuery: sql block:^(sqlite3_stmt *rowData) {
                     }];
                     [SQLiteLibrary commit];
-                    [self loadSelectArrayWithIndex:selectedIndex];
-                    [self.todayTableView reloadData];
+                    for (VocabularyModel *item in originVocabularys) {
+                        if (vocabulary.ID == item.ID){
+                            item.isFavorite = 1;
+                            break;
+                        }
+                    }
                     if ([selectedArray count] <=0){
-                        [weakSelf showAlertWithMessage:@"Successfully" andInformative:@"Finish! Well done." andBlock:nil];
+                        [weakSelf showAlertWithMessage:@"Successfully" andInformative:@"Finish! Well done." andBlock:^(NSInteger result) {
+                            for (int i = 0; i < originVocabularys.count; i ++) {
+                                VocabularyModel * vocabularyModel = originVocabularys[i];
+                                if (vocabularyModel.isFavorite == NO){
+                                    [selectedArray addObject:vocabularyModel];
+                                }
+                                if ([selectedArray count] >= 5){
+                                    break;
+                                }
+                            }
+                            [self.todayTableView reloadData];
+                        }];
                         weakSelf.btnPlayNow.image = [NSImage imageNamed:@"Play_Now"];
                         if ([weakSelf.timerForLoopStatus isValid]){
                             [weakSelf.timerForLoopStatus invalidate];
@@ -314,7 +270,7 @@
         }
     }
     return NO;
-
+    
 }
 -(NSString *)decodeDatabyBase64:(NSString *)decodeString{
     NSString *newDecodeString = [decodeString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
@@ -322,47 +278,30 @@
     NSString *decodedString = [[NSString alloc] initWithData:decodedData encoding:NSUTF8StringEncoding];
     return decodedString;
 }
--(void)filterOriginVocabulary:(NSArray *) array{
-    
-    for (VocabularyModel *item in array) {
-        BOOL exist = NO;
-        for (TypeVocabulary *itemType in selectedArrayType) {
-            if ([item.type isEqualToString:itemType.type]){
-                exist = YES;
-                
-                itemType.number += 1;
-                if (item.isFavorite == TRUE){
-                    itemType.TotalFavorite += 1;
-                }
-                break;
-            }
-        }
-        if (exist == NO) {
-            TypeVocabulary *newItem = [[TypeVocabulary alloc] init];
-            newItem.type = item.type;
-            newItem.number = 0;
-            newItem.TotalFavorite = 0;
-            [selectedArrayType addObject:newItem];
-        }
-    }
-    
-    [selectedArrayType sortUsingDescriptors:
-     @[
-       [NSSortDescriptor sortDescriptorWithKey:@"type" ascending:YES]
-       ]];
-}
+
 - (IBAction)abtnDoneRow:(id)sender {
     NSButton *select = sender;
-    VocabularyModel * vocabularyModel = (VocabularyModel*)vocabularys[select.tag] ;
-    
-    NSString *sql = [NSString stringWithFormat:@"UPDATE phrases SET favorite = '%ld' WHERE idphrases = %li",(long)select.state, vocabularyModel.ID];
+    VocabularyModel * vocabularyModel = (VocabularyModel*)originVocabularys[select.tag] ;
+    [SQLiteLibrary setDatabaseFileInDocuments:@"700TOEIC" ofType:@"sqlite"];
+
+    NSString *sql = [NSString stringWithFormat:@"UPDATE ZVOCABWORD SET Z_OPT = '%ld' WHERE Z_PK = %li",(long)select.state, vocabularyModel.ID];
     [SQLiteLibrary begin];
     [SQLiteLibrary performQuery: sql block:^(sqlite3_stmt *rowData) {
     }];
     [SQLiteLibrary commit];
-    [self loadSelectArrayWithIndex:selectedIndex];
+    vocabularyModel.isFavorite = select.state;
+    [selectedArray removeAllObjects];
+    for (int i = 0; i < originVocabularys.count; i ++) {
+        VocabularyModel * vocabularyModel = originVocabularys[i];
+        if (vocabularyModel.isFavorite == NO){
+            [selectedArray addObject:vocabularyModel];
+        }
+        if ([selectedArray count] >= 5){
+            break;
+        }
+    }
     [self.todayTableView reloadData];
-
+    
 }
 -(void)showAlertWithMessage:(NSString *)message andInformative:(NSString *)informative andBlock:(void (^ __nullable)(NSInteger result))block {
     NSAlert *alert = [NSAlert new];
@@ -382,3 +321,4 @@
     
 }
 @end
+

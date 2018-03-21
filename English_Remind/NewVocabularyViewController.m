@@ -56,6 +56,10 @@ NSMutableArray *vocabularys, *selectedArray, *originVocabularys, *counterVocabul
     if ([userDefaults objectForKey:@"ENGLISH_REMIND_POINT"] == nil){
         [userDefaults setInteger:0 forKey:@"ENGLISH_REMIND_POINT"];
     }
+    if ([userDefaults objectForKey:@"ENGLISH_REMIND_IS_SOUND"] == nil){
+        [userDefaults setInteger:0 forKey:@"ENGLISH_REMIND_IS_SOUND"];
+    }
+    
     [self.searchBar setDelegate:self];
     selectedArray = [[NSMutableArray alloc] init];
     originVocabularys = [[NSMutableArray alloc] init];
@@ -72,11 +76,12 @@ NSMutableArray *vocabularys, *selectedArray, *originVocabularys, *counterVocabul
     self.textFieldTime.stringValue =[NSString stringWithFormat:@"%li" ,(long)[userDefaults integerForKey:@"ENGLISH_REMIND_TIME"]];
     self.textfieldInputCounter.stringValue = [NSString stringWithFormat:@"%li" ,(long)[userDefaults integerForKey:@"ENGLISH_REMIND_COUNTER"] ];
     self.labelPoint.stringValue = [NSString stringWithFormat:@"%li" ,(long)[userDefaults integerForKey:@"ENGLISH_REMIND_POINT"]];
+    [self.btnSoundOutlet setState:[userDefaults integerForKey:@"ENGLISH_REMIND_IS_SOUND"]];
 }
 - (void)loadDataFromSQLite {
     
-    [SQLiteLibrary setDatabaseFileInDocuments:@"NewVocabulary"];
-    [SQLiteLibrary setupDatabaseAndForceReset:YES];
+
+    [SQLiteLibrary setDatabaseFileInDocuments:@"NewVocabulary" ofType:@"sqlite"];
     [vocabularys removeAllObjects];
     [originVocabularys removeAllObjects];
     [SQLiteLibrary begin];
@@ -158,10 +163,10 @@ NSMutableArray *vocabularys, *selectedArray, *originVocabularys, *counterVocabul
 #pragma mark Action Button
 - (IBAction)abtnDeleteRow:(id)sender {
     NSButton *delete = sender;
-    NSLog(@"🔴%li",(long)delete.tag);
     VocabularyModel * vocabularyModel = (VocabularyModel*)vocabularys[delete.tag];
     NSString * sql = [NSString stringWithFormat:@"DELETE FROM Vocabulary WHERE id = %li",(long)vocabularyModel.ID];
-    
+    [SQLiteLibrary setDatabaseFileInDocuments:@"NewVocabulary" ofType:@"sqlite"];
+
     [SQLiteLibrary begin];
     [SQLiteLibrary performQuery: sql block:^(sqlite3_stmt *rowData) {
         
@@ -177,6 +182,8 @@ NSMutableArray *vocabularys, *selectedArray, *originVocabularys, *counterVocabul
     VocabularyModel * vocabularyModel = (VocabularyModel*)vocabularys[select.tag] ;
     
     NSString *sql = [NSString stringWithFormat:@"UPDATE Vocabulary SET favorite = '%ld' WHERE id = %li",(long)select.state, vocabularyModel.ID];
+    [SQLiteLibrary setDatabaseFileInDocuments:@"NewVocabulary" ofType:@"sqlite"];
+
     [SQLiteLibrary begin];
     [SQLiteLibrary performQuery: sql block:^(sqlite3_stmt *rowData) {
     }];
@@ -193,7 +200,6 @@ NSMutableArray *vocabularys, *selectedArray, *originVocabularys, *counterVocabul
             [alert addButtonWithTitle:@"Ok"];
             
             [alert beginSheetModalForWindow:[self.view window] completionHandler:^(NSInteger result) {
-                NSLog(@"Success");
             }];
             return;
         } else {
@@ -415,5 +421,11 @@ NSMutableArray *vocabularys, *selectedArray, *originVocabularys, *counterVocabul
             block(result);
         }
     }];
+}
+- (IBAction)btnSound:(id)sender {
+    NSButton *button = sender;
+    [userDefaults setInteger:(long)button.state forKey:@"ENGLISH_REMIND_IS_SOUND"];
+    [self.btnSoundOutlet setState:[userDefaults integerForKey:@"ENGLISH_REMIND_IS_SOUND"]];
+
 }
 @end

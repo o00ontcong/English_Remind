@@ -8,7 +8,7 @@
 
 #import "ShowWindowController.h"
 
-@interface ShowWindowController (){
+@interface ShowWindowController ()<NSSpeechSynthesizerDelegate>{
     BOOL result;
 }
 
@@ -25,14 +25,24 @@
     [super showWindow:sender];
     self.textVietnamese.stringValue = self.vocabulary.vietnamese;
     result = YES;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    if ([userDefaults integerForKey:@"ENGLISH_REMIND_IS_SOUND"] == 0){
+        return;
+    }
+
+    self.speechSynthesizer = [[NSSpeechSynthesizer alloc] init];
+    self.speechSynthesizer.delegate = self;
+    [self.speechSynthesizer startSpeakingString:self.vocabulary.english];
+
 }
 - (IBAction)closeAction:(id)sender {
     [self close];
 }
 
 - (IBAction)textfieldInputAction:(id)sender {
-    NSCharacterSet * alphaNumSet = [NSCharacterSet characterSetWithCharactersInString:@"!@#$%^&*?.,'~-=_+()[]/<>:;"];
+    [self.speechSynthesizer startSpeakingString:self.vocabulary.english];
 
+    NSCharacterSet * alphaNumSet = [NSCharacterSet characterSetWithCharactersInString:@"!@#$%^&*?.,'~-=_+()[]/<>:;"];
     NSString *stringValue = self.textfieldInput.stringValue.lowercaseString;
     stringValue = [stringValue stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     stringValue = [stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];

@@ -1,17 +1,20 @@
 //
-//  AvailableVocabularyViewController.h
+//  TOEIC700ViewController.h
 //  English_Remind
 //
-//  Created by Cong Nguyen on 16/03/2018.
+//  Created by Cong Nguyen on 20/03/2018.
 //  Copyright © 2018 MAC. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
 #import "English_Remind-Swift.h"
 #import "TypeVocabulary.h"
-@interface AvailableVocabularyViewController : NSViewController <NMDatePickerDelegate>
+#import "Utility.h"
+#import "FavoriteTableCellView.h"
+#import "ShowWindowController.h"
 
-@property (weak) IBOutlet NSTableView *listTableView;
+@interface TOEIC700ViewController : NSViewController <NMDatePickerDelegate>
+
 @property (weak) IBOutlet NSTableView *todayTableView;
 @property (weak) IBOutlet NMDatePicker *viewDatePicker;
 

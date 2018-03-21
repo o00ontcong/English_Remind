@@ -17,5 +17,7 @@
 @property (weak) IBOutlet NSButton *btnInsert;
 @property (weak) IBOutlet NSButton *btnUpdate;
 @property (weak) IBOutlet NSButton *btnClear;
+- (IBAction)btnSound:(id)sender;
+@property (weak) IBOutlet NSButton *btnSoundOutlet;
 
 @end
