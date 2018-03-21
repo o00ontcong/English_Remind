@@ -61,7 +61,7 @@
     selectedArrayType = [[NSMutableArray alloc] init];
     [self loadDataFromSQLite];
     [self windowRefresh:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowRefresh:) name:@"NewVocabularyViewControllerRefresh" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowRefresh:) name:@"AvailableVocabularyViewController" object:nil];
 
 }
 + (NSString *)shortDateForDate:(NSDate *)date {

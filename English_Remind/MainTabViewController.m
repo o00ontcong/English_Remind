@@ -32,6 +32,16 @@
 
 -(void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem{
     NSUInteger index = [tabView indexOfTabViewItem:[tabView selectedTabViewItem]];
+    if (index == 0){
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NewVocabularyViewControllerRefresh" object:nil];
+
+    } else if (index == 1){
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"AvailableVocabularyViewController" object:nil];
+
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TOEIC700ViewController" object:nil];
+
+    }
 
 
 }
